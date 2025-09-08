@@ -15,34 +15,3 @@
 }
 
 /* Ensure ScrollStack has proper dimensions */
-.scroll-stack-scroller {
-  flex: 1;
-  width: 100%;
-  /* Remove max-width constraint to allow full width */
-}
-
-.stackItem1 {
-  background: #9d03fc;
-  border-radius: 10px;
-  width: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  color: white;
-  font-size: 1.3rem;
-  box-shadow: 0 0 10px 1px white;
-}
-
-.stackItem2 {
-  box-shadow: 0 0 10px 1px white;
-  background: #141313;
-  border-radius: 10px;
-  width: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  color: white;
-  font-size: 1.3rem;
-}
