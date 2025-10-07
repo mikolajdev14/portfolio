@@ -1,5 +1,67 @@
 .box {
+  width: 100%;
+}
+
+/* Slick overrides to prevent layout issues */
+.slick-slider {
+  width: 100%;
+  position: relative;
+}
+
+.slick-list {
+  overflow: hidden;
+}
+
+.slick-track {
   display: flex;
-  justify-content: space-around;
-  width: 50%;
+}
+
+.slick-slide {
+  height: auto;
+}
+
+.slick-slide > div {
+  width: 100%;
+}
+
+/* Keep dots but remove white gap and place them over the slider */
+.slick-dotted.slick-slider {
+  margin-bottom: 0;
+}
+
+.slick-dots {
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  right: 0;
+  background: transparent;
+}
+
+.slick-dots li button:before {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.6);
+  opacity: 1;
+}
+
+.slick-dots li.slick-active button:before {
+  color: #9d03fc;
+  opacity: 1;
+}
+
+.project {
+  margin: 20px;
+  width: 100%;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: white;
+  text-shadow: 0 0 20px rgba(157, 3, 252, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.project img {
+  width: 60%;
+  height: 60%;
 }

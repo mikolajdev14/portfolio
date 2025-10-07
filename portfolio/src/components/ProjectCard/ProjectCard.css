@@ -1,7 +1,21 @@
 .project {
-  border: 3px solid white;
+  padding: 12px;
 }
 
 .project img {
-  width: 70%;
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+@media (max-width: 768px) {
+  .project {
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .project {
+    font-size: 1.1rem;
+  }
 }

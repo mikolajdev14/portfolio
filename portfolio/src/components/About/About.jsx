@@ -18,7 +18,7 @@ export function About() {
         alignItems: "center",
       }}
     >
-      <h1>
+      <h1 className="aboutTitle">
         About <span style={{ color: "#9d03fc" }}>me</span>
       </h1>
       <div className="aboutBox">

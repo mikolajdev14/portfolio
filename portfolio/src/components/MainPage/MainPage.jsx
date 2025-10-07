@@ -6,10 +6,38 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
 import { Skills } from "../Skills/Skills";
 import { Projects } from "../Projects/Projects";
+import { useState } from "react";
+import { Contact } from "../Contact/Contact";
 
 export function MainPage() {
+  const [menuOpen, setMenuOpen] = useState(false);
   return (
     <div className="MainPageContainer">
+      {/* Global fixed NavBar */}
+      <div className="NavBar">
+        <div className="Logo">Mikolaj.</div>
+        <button
+          className="MenuToggle"
+          aria-label="Toggle navigation menu"
+          aria-expanded={menuOpen}
+          onClick={() => setMenuOpen((v) => !v)}
+          type="button"
+        >
+          ☰
+        </button>
+        <div
+          className={`Links ${menuOpen ? "open" : ""}`}
+          onClick={() => setMenuOpen(false)}
+        >
+          <a href="#home">Home</a>
+          <a href="#about">About</a>
+          <a href="#skills">Skills</a>
+          <a href="#projects">Projects</a>
+
+          <a href="#contact">Contact</a>
+        </div>
+      </div>
+
       {/* LightRays as background */}
       <div className="LightRaysContainer">
         <LightRays
@@ -27,17 +55,7 @@ export function MainPage() {
       </div>
 
       {/* Welcome Section - Centered in viewport */}
-      <div className="WelcomeSection">
-        <div className="NavBar">
-          <div className="Logo">Mikolaj.</div>
-          <div className="Links">
-            <a href="">Home</a>
-            <a href="">About</a>
-            <a href="">Projects</a>
-            <a href="">Skills</a>
-            <a href="">Contact</a>
-          </div>
-        </div>
+      <div className="WelcomeSection" id="home">
         <div className="welcomeContainer">
           <TextType
             text={["Hi ! I'm Mikołaj Siwiecki"]}
@@ -62,7 +80,9 @@ export function MainPage() {
             initialDelay={2000}
             className="smTextType"
           />
-          <button className="VMWbutton">View My Work</button>
+          <a className="VMWbutton" href="#projects">
+            View My Work
+          </a>
         </div>
         <div className="scrollBox">
           <FontAwesomeIcon icon={faArrowDown} />
@@ -71,14 +91,18 @@ export function MainPage() {
       </div>
 
       {/* About Section - Separate section below */}
-      <div className="AboutSection">
+      <div className="AboutSection" id="about">
         <About />
       </div>
-      <div className="skillSection">
+      <div className="skillSection" id="skills">
         <Skills />
       </div>
-      <div className="projectSection">
+      <div className="projectSection" id="projects">
         <Projects />
+      </div>
+      {/* Placeholder anchor target for Contact if/until real section exists */}
+      <div className="ContactSection" id="contact">
+        <Contact></Contact>
       </div>
     </div>
   );
