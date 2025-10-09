@@ -6,6 +6,7 @@ import {
   faPhone,
   faMapLocation,
 } from "@fortawesome/free-solid-svg-icons";
+import emailjs from "@emailjs/browser";
 export function Contact() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -20,33 +21,30 @@ export function Contact() {
     setStatus("");
     setIsSending(true);
     const form = event.currentTarget;
-    const formData = new FormData(form);
 
-    formData.append("access_key", "ee2e360f-f841-4e52-a01b-fd4da7704996");
-
-    try {
-      const res = await fetch("/web3forms/submit", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
+    emailjs
+      .sendForm(
+        "service_6grfqjd",
+        "template_p74lq8u",
+        form,
+        "zi4NnaNsXzp4TV37G"
+      )
+      .then(
+        (result) => {
+          console.log("Success", result);
+          setStatus("Message sent successfully. Thank you!");
+          setName("");
+          setEmail("");
+          setMessage("");
         },
-        body: formData,
-      }).then((r) => r.json());
-
-      if (res.success) {
-        console.log("Success", res);
-        setStatus("Message sent successfully. Thank you!");
-        setName("");
-        setEmail("");
-        setMessage("");
-      } else {
-        setStatus(res.message || "Failed to send. Please try again later.");
-      }
-    } catch (err) {
-      setStatus("Network error. Please try again later.");
-    } finally {
-      setIsSending(false);
-    }
+        (error) => {
+          console.log("Error", error);
+          setStatus("Failed to send. Please try again later.");
+        }
+      )
+      .finally(() => {
+        setIsSending(false);
+      });
   };
 
   return (
@@ -103,7 +101,13 @@ export function Contact() {
             </button>
           </form>
           {status && (
-            <div style={{ marginTop: "0.6rem", fontSize: "0.95rem" }}>
+            <div
+              style={{
+                marginTop: "0.6rem",
+                fontSize: "0.95rem",
+                textAlign: "center",
+              }}
+            >
               {status}
             </div>
           )}
