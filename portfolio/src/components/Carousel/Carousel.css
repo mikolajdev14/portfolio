@@ -2,7 +2,6 @@
   width: 100%;
 }
 
-/* Slick overrides to prevent layout issues */
 .slick-slider {
   width: 100%;
   position: relative;
@@ -22,9 +21,13 @@
 
 .slick-slide > div {
   width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 1rem;
+  min-height: 500px;
 }
 
-/* Keep dots but remove white gap and place them over the slider */
 .slick-dotted.slick-slider {
   margin-bottom: 0;
 }
@@ -46,22 +49,4 @@
 .slick-dots li.slick-active button:before {
   color: #9d03fc;
   opacity: 1;
-}
-
-.project {
-  margin: 20px;
-  width: 100%;
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: white;
-  text-shadow: 0 0 20px rgba(157, 3, 252, 0.5);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.project img {
-  width: 60%;
-  height: 60%;
 }

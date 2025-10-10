@@ -1,19 +1,17 @@
-﻿/* Skills component styling */
-.skills-container {
+﻿.skills-container {
   width: 100%;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 2rem 0;
-  /* Remove the gradient background to match the rest of the website */
+  padding: 3rem 0 2rem 0;
 }
 
 .skills-title {
-  margin-top: 4rem;
+  margin-top: 2rem;
   margin-bottom: 3rem;
   text-align: center;
-  font-size: 4rem;
+  font-size: 3rem;
   font-weight: 700;
   color: white;
   text-shadow: 0 0 20px rgba(157, 3, 252, 0.5);
@@ -183,10 +181,27 @@
   font-weight: 600;
 }
 
-/* Responsive Design */
+@media (max-width: 1200px) {
+  .skills-title {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .skills-title {
+    font-size: 2rem;
+  }
+}
+
 @media (max-width: 768px) {
   .skills-container {
-    padding: 1rem;
+    padding: 2rem 1rem 1rem 1rem;
+  }
+
+  .skills-title {
+    font-size: 1.75rem;
+    margin-top: 1.5rem;
+    margin-bottom: 2rem;
   }
 
   .skillsUl {
@@ -221,6 +236,16 @@
 }
 
 @media (max-width: 480px) {
+  .skills-container {
+    padding: 1.5rem 0.5rem 1rem 0.5rem;
+  }
+
+  .skills-title {
+    font-size: 1.5rem;
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
   .skillsUl {
     flex-wrap: wrap;
     justify-content: center;
@@ -228,11 +253,45 @@
   }
 
   .skillsUl > li {
-    font-size: 0.9rem;
-    padding: 5px 12px;
+    font-size: 0.8rem;
+    padding: 4px 10px;
   }
 
   .skillsMain {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+    padding: 0 0.5rem;
+  }
+
+  .skillBox {
+    padding: 0.75rem;
+    border-radius: 15px;
+    aspect-ratio: 1;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .skillIcon {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .skillName {
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    text-align: center;
+  }
+
+  .skillLevel {
+    height: 4px;
+    width: 80%;
+    margin-bottom: 0.25rem;
+  }
+
+  .skillPercentage {
+    font-size: 0.7rem;
   }
 }

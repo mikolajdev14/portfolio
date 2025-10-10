@@ -1,6 +1,10 @@
 ﻿import "./Skills.css";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 import {
   faCss3,
   faHtml5,
@@ -20,8 +24,31 @@ import {
   faCog,
 } from "@fortawesome/free-solid-svg-icons";
 
-export function Skills() {
+const skillsTranslations = {
+  en: {
+    title: "My",
+    skills: "Skills",
+    all: "All",
+    frontend: "Frontend",
+    backend: "Backend",
+    tools: "Tools",
+  },
+  pl: {
+    title: "Moje",
+    skills: "Umiejętności",
+    all: "Wszystkie",
+    frontend: "Frontend",
+    backend: "Backend",
+    tools: "Narzędzia",
+  },
+};
+
+export function Skills({ language = "en" }) {
   const [activeFilter, setActiveFilter] = useState("All");
+
+  const titleRef = useRef(null);
+  const navRef = useRef(null);
+  const skillsRef = useRef(null);
 
   const skillsData = [
     { name: "JavaScript", icon: faJs, category: "Frontend", level: 90 },
@@ -40,7 +67,12 @@ export function Skills() {
     { name: "Webpack", icon: faCog, category: "Tools", level: 60 },
   ];
 
-  const categories = ["All", "Frontend", "Backend", "Tools"];
+  const categories = [
+    skillsTranslations[language].all,
+    skillsTranslations[language].frontend,
+    skillsTranslations[language].backend,
+    skillsTranslations[language].tools,
+  ];
 
   const filteredSkills = skillsData.filter(
     (skill) => activeFilter === "All" || skill.category === activeFilter
@@ -50,13 +82,117 @@ export function Skills() {
     setActiveFilter(category);
   };
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (skillsRef.current && skillsRef.current.children.length > 0) {
+        const skillBoxes = skillsRef.current.children;
+
+        gsap.set(skillBoxes, { opacity: 0, y: 20, scale: 0.9 });
+
+        gsap.to(skillBoxes, {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.4,
+          stagger: 0.05,
+          ease: "power2.out",
+        });
+
+        ScrollTrigger.refresh();
+      }
+    }, 10);
+
+    return () => clearTimeout(timer);
+  }, [activeFilter]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (titleRef.current) {
+        gsap.fromTo(
+          titleRef.current,
+          { opacity: 0, y: 50 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: titleRef.current,
+              start: "top 90%",
+              toggleActions: "play none none reverse",
+              fastScrollEnd: true,
+            },
+          }
+        );
+      }
+
+      if (navRef.current) {
+        gsap.fromTo(
+          navRef.current,
+          { opacity: 0, y: 30 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.5,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: navRef.current,
+              start: "top 85%",
+              toggleActions: "play none none reverse",
+              fastScrollEnd: true,
+            },
+          }
+        );
+      }
+
+      if (skillsRef.current && skillsRef.current.children.length > 0) {
+        gsap.fromTo(
+          skillsRef.current.children,
+          { opacity: 0, y: 50, scale: 0.8 },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.5,
+            stagger: 0.08,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: skillsRef.current,
+              start: "top 80%",
+              toggleActions: "play none none reverse",
+              fastScrollEnd: true,
+            },
+          }
+        );
+      }
+
+      ScrollTrigger.refresh();
+    }, 50);
+
+    return () => {
+      clearTimeout(timer);
+      ScrollTrigger.getAll().forEach((trigger) => {
+        if (
+          trigger.trigger === titleRef.current ||
+          trigger.trigger === navRef.current ||
+          trigger.trigger === skillsRef.current
+        ) {
+          trigger.kill();
+        }
+      });
+    };
+  }, []);
+
   return (
     <div className="skills-container">
-      <h1 className="skills-title">
-        My <span style={{ color: "#9d03fc" }}>Skills</span>
+      <h1 className="skills-title" ref={titleRef}>
+        {skillsTranslations[language].title}{" "}
+        <span style={{ color: "#9d03fc" }}>
+          {skillsTranslations[language].skills}
+        </span>
       </h1>
 
-      <div className="skillsNav">
+      <div className="skillsNav" ref={navRef}>
         <ul className="skillsUl">
           {categories.map((category) => (
             <li
@@ -70,7 +206,7 @@ export function Skills() {
         </ul>
       </div>
 
-      <div className="skillsMain">
+      <div className="skillsMain" ref={skillsRef}>
         {filteredSkills.map((skill, index) => (
           <div
             key={skill.name}

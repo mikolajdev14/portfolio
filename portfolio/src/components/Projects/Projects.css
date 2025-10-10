@@ -8,55 +8,69 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  width: 100%;
+  min-height: 100vh;
+  padding: 3rem 0 2rem 0;
 }
 
 .projectsTitle {
-  margin-top: 4rem;
+  margin-top: 2rem;
   margin-bottom: 3rem;
   text-align: center;
-  font-size: 4rem;
+  font-size: 3rem;
   font-weight: 700;
   color: white;
   text-shadow: 0 0 20px rgba(157, 3, 252, 0.5);
 }
 
-/* Responsive */
 @media (max-width: 1200px) {
+  .ProjectsContainer {
+    padding: 2rem 0 1rem 0;
+  }
   .carouselContainer {
     width: 85%;
   }
   .projectsTitle {
-    font-size: 3.5rem;
+    font-size: 2.5rem;
   }
 }
 
 @media (max-width: 992px) {
+  .ProjectsContainer {
+    padding: 2rem 0 1rem 0;
+  }
   .carouselContainer {
     width: 90%;
   }
   .projectsTitle {
-    font-size: 3rem;
+    font-size: 2rem;
   }
 }
 
 @media (max-width: 768px) {
+  .ProjectsContainer {
+    padding: 1.5rem 1rem 1rem 1rem;
+  }
   .carouselContainer {
     width: 95%;
   }
   .projectsTitle {
-    font-size: 2.25rem;
-    margin-top: 3rem;
+    font-size: 1.75rem;
+    margin-top: 1.5rem;
     margin-bottom: 2rem;
   }
 }
 
 @media (max-width: 480px) {
+  .ProjectsContainer {
+    padding: 1rem 0.5rem 0.5rem 0.5rem;
+  }
   .carouselContainer {
     width: 100%;
   }
   .projectsTitle {
-    font-size: 1.8rem;
-    margin-top: 2rem;
+    font-size: 1.5rem;
+    margin-top: 1rem;
     margin-bottom: 1.5rem;
   }
 }

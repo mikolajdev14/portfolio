@@ -17,6 +17,6 @@ html {
 .AboutSection,
 .skillSection,
 .projectSection,
-#contact {
-  scroll-margin-top: 72px;
+.ContactSection {
+  scroll-margin-top: 100px; /* Increased for better spacing with fixed navbar */
 }

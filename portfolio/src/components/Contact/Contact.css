@@ -1,6 +1,6 @@
 .contact-title {
-  margin-top: 6rem;
-  margin-bottom: 2rem;
+  margin-top: 4rem;
+  margin-bottom: 3rem;
   text-align: center;
   font-size: 3rem;
   font-weight: 700;
@@ -19,6 +19,7 @@
   justify-content: center;
   align-items: center;
   gap: 1rem;
+  min-height: 80vh;
 }
 
 .contactBox > span {
@@ -83,7 +84,6 @@
   font-size: 1.1rem;
 }
 
-/* Form */
 .contactBox form {
   display: flex;
   flex-direction: column;
@@ -154,11 +154,10 @@
   transform: none;
 }
 
-/* Responsive */
 @media (max-width: 992px) {
   .contact-title {
-    font-size: 2.5rem;
-    margin-top: 5.5rem;
+    font-size: 2rem;
+    margin-top: 4rem;
   }
 }
 
@@ -167,7 +166,7 @@
     grid-template-columns: 1fr;
   }
   .contact-title {
-    font-size: 2.15rem;
+    font-size: 1.5rem;
   }
   .contactBox {
     padding: 0.5rem 1rem 3rem;
@@ -176,6 +175,24 @@
 
 @media (max-width: 480px) {
   .contact-title {
-    font-size: 1.9rem;
+    font-size: 1.2rem;
   }
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
+
+.info-container > div,
+.info-container > a {
+  transition: 0.2s;
+  margin: 10px 0;
+}
+
+.info-container > div:hover,
+.info-container > a:hover {
+  transition: 0.2s;
+  background: rgba(255, 255, 255, 0.06);
+  transform: translateY(-5px);
 }
