@@ -16,7 +16,7 @@
   width: 100%;
   max-width: 320px;
   margin: 0 auto;
-  height: 480px;
+  min-height: 480px;
   justify-content: space-between;
   align-self: center;
 }
@@ -96,11 +96,6 @@
   line-height: 1.5;
   margin-bottom: 1.2rem;
   flex: 1;
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 4;
-  -webkit-box-orient: vertical;
-  text-overflow: ellipsis;
   min-height: 80px;
 }
 
@@ -184,7 +179,7 @@
   .project {
     padding: 1.5rem;
     max-width: 280px;
-    height: 420px;
+    min-height: 420px;
   }
 
   .project img {
@@ -197,7 +192,6 @@
 
   .project-description {
     font-size: 0.9rem;
-    -webkit-line-clamp: 3;
     min-height: 60px;
   }
 
@@ -217,7 +211,7 @@
   .project {
     padding: 1.2rem;
     max-width: 260px;
-    height: 380px;
+    min-height: 380px;
   }
 
   .project img {
@@ -230,7 +224,6 @@
 
   .project-description {
     font-size: 0.85rem;
-    -webkit-line-clamp: 3;
     min-height: 50px;
   }
 

@@ -1,6 +1,7 @@
 import "./Carousel.css";
 import { useState, useEffect } from "react";
 import codeImage from "../../assets/code.png";
+import portfolioImage from "../../assets/image.png";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -10,7 +11,7 @@ const projectTranslations = {
   en: [
     {
       ref: "portfolio",
-      img: codeImage,
+      img: portfolioImage,
       title: "Personal Portfolio Website",
       description:
         "A modern, responsive portfolio website built with React, featuring smooth animations, interactive elements, and a clean design. Includes sections for projects, skills, and contact information.",
@@ -81,7 +82,7 @@ const projectTranslations = {
   pl: [
     {
       ref: "portfolio",
-      img: codeImage,
+      img: portfolioImage,
       title: "Osobista strona portfolio",
       description:
         "Nowoczesna, responsywna strona portfolio zbudowana w React, z płynnymi animacjami, interaktywnymi elementami i czystym designem. Zawiera sekcje projektów, umiejętności i informacje kontaktowe.",

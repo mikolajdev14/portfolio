@@ -13,33 +13,34 @@ const aboutTranslations = {
   en: {
     title: "About",
     me: "me",
-    heading: "Passionate Web Developer & Tech Creator",
+    heading: "Innovative Web Developer & Digital Solutions Architect",
     description:
-      "I'm passionate about creating elegant solutions to complex problems, and I'm constantly learning new technologies and techniques to stay at the forefront of the ever-evolving web landscape.",
+      "I thrive on turning complex problems into elegant, user-centric solutions. With a relentless commitment to learning, I stay ahead of the curve in web technologies, delivering projects that not only meet expectations but exceed them.",
     websites: "Websites",
-    websitesDesc: "Creating websites using modern technologies like React",
-    webApps: "Web Application",
+    websitesDesc:
+      "Crafting visually stunning and highly functional websites using modern technologies like React, ensuring optimal performance and user engagement.",
+    webApps: "Web Applications",
     webAppsDesc:
-      "Creating web applications using modern technologies like React",
-    mobileApps: "Mobile Application",
+      "Developing robust web applications with React and complementary technologies, tailored to solve real-world challenges and drive business growth.",
+    mobileApps: "Mobile Applications",
     mobileAppsDesc:
-      "Creating mobile applications using modern technologies like React Native",
+      "Building intuitive mobile applications with React Native, providing seamless experiences across iOS and Android platforms.",
   },
   pl: {
     title: "O",
     me: "mnie",
-    heading: "Pasjonat Rozwoju Webowego i Twórca Technologii",
+    heading: "Innowacyjny Deweloper Webowy i Architekt Rozwiązań Cyfrowych",
     description:
-      "Jestem pasjonatem tworzenia eleganckich rozwiązań dla złożonych problemów i stale uczę się nowych technologii i technik, aby pozostać na czele ciągle ewoluującego krajobrazu internetowego.",
+      "Kwitam się na przekształcaniu złożonych problemów w eleganckie, skoncentrowane na użytkowniku rozwiązania. Z nieustannym zaangażowaniem w naukę, pozostaję na czele krzywej w technologiach webowych, dostarczając projekty, które nie tylko spełniają oczekiwania, ale je przekraczają.",
     websites: "Strony internetowe",
     websitesDesc:
-      "Tworzenie stron internetowych przy użyciu nowoczesnych technologii jak React",
+      "Tworzenie wizualnie imponujących i wysoce funkcjonalnych stron internetowych przy użyciu nowoczesnych technologii jak React, zapewniając optymalną wydajność i zaangażowanie użytkowników.",
     webApps: "Aplikacje webowe",
     webAppsDesc:
-      "Tworzenie aplikacji webowych przy użyciu nowoczesnych technologii jak React",
+      "Rozwijanie solidnych aplikacji webowych z React i uzupełniającymi technologiami, dostosowanymi do rozwiązywania rzeczywistych wyzwań i napędzania wzrostu biznesu.",
     mobileApps: "Aplikacje mobilne",
     mobileAppsDesc:
-      "Tworzenie aplikacji mobilnych przy użyciu nowoczesnych technologii jak React Native",
+      "Budowanie intuicyjnych aplikacji mobilnych z React Native, zapewniając płynne doświadczenia na platformach iOS i Android.",
   },
 };
 
