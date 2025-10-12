@@ -100,6 +100,7 @@ export function Skills({ language = "en" }) {
           duration: 0.4,
           stagger: 0.05,
           ease: "power2.out",
+          force3D: true,
         });
 
         ScrollTrigger.refresh();
@@ -160,6 +161,7 @@ export function Skills({ language = "en" }) {
             duration: 0.5,
             stagger: 0.08,
             ease: "power2.out",
+            force3D: true,
             scrollTrigger: {
               trigger: skillsRef.current,
               start: "top 80%",

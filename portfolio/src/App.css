@@ -7,6 +7,12 @@
   font-family: "Poppins", "sans-serif";
 }
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 html {
   height: 100%;
   overflow-x: hidden;
@@ -24,6 +30,7 @@ body {
   overflow-x: hidden;
   overflow-y: auto;
   min-height: 100vh;
+  will-change: auto;
 }
 
 #root {
