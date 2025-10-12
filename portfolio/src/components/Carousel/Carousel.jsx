@@ -90,6 +90,14 @@ const projectTranslations = {
 const initProjects = projectTranslations.en;
 
 export function Carousel({ language = "en" }) {
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const settings = {
     dots: true,
     infinite: true,
@@ -109,7 +117,21 @@ export function Carousel({ language = "en" }) {
     setProjects(projectTranslations[language]);
   }, [language]);
 
-  return (
+  return isMobile ? (
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        gap: "2rem",
+        alignItems: "center",
+        padding: "0 1rem",
+      }}
+    >
+      {projects.map((project, index) => (
+        <ProjectCard key={index} project={project} language={language} />
+      ))}
+    </div>
+  ) : (
     <Slider {...settings}>
       {projects.map((project, index) => (
         <div key={index}>
