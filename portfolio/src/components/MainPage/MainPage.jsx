@@ -22,7 +22,7 @@ const translations = {
     contact: "Contact",
     greeting: "Hi ! I'm Mikołaj Siwiecki",
     subtitle:
-      "I made web application and websites. Specializing in front-end but also know back-end.",
+      "I make web application and websites. Specializing in front-end but also know back-end.",
     viewWork: "View My Work",
     scroll: "Scroll",
   },

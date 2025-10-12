@@ -50,6 +50,10 @@ export function Skills({ language = "en" }) {
   const navRef = useRef(null);
   const skillsRef = useRef(null);
 
+  useEffect(() => {
+    setActiveFilter("All");
+  }, [language]);
+
   const skillsData = [
     { name: "JavaScript", icon: faJs, category: "Frontend", level: 90 },
     { name: "React", icon: faReact, category: "Frontend", level: 85 },
@@ -68,10 +72,10 @@ export function Skills({ language = "en" }) {
   ];
 
   const categories = [
-    skillsTranslations[language].all,
-    skillsTranslations[language].frontend,
-    skillsTranslations[language].backend,
-    skillsTranslations[language].tools,
+    { display: skillsTranslations[language].all, value: "All" },
+    { display: skillsTranslations[language].frontend, value: "Frontend" },
+    { display: skillsTranslations[language].backend, value: "Backend" },
+    { display: skillsTranslations[language].tools, value: "Tools" },
   ];
 
   const filteredSkills = skillsData.filter(
@@ -196,11 +200,11 @@ export function Skills({ language = "en" }) {
         <ul className="skillsUl">
           {categories.map((category) => (
             <li
-              key={category}
-              className={activeFilter === category ? "active" : ""}
-              onClick={() => handleFilterChange(category)}
+              key={category.value}
+              className={activeFilter === category.value ? "active" : ""}
+              onClick={() => handleFilterChange(category.value)}
             >
-              {category}
+              {category.display}
             </li>
           ))}
         </ul>

@@ -35,16 +35,6 @@ export function ProjectCard({ project, language = "en" }) {
         )}
 
         <div className="project-links">
-          {project.live && (
-            <a
-              href={project.live}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="project-link live-link"
-            >
-              {projectCardTranslations[language].liveDemo}
-            </a>
-          )}
           <a
             href={project.github}
             target="_blank"

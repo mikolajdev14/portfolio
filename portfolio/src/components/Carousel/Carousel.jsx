@@ -2,6 +2,7 @@ import "./Carousel.css";
 import { useState, useEffect } from "react";
 import codeImage from "../../assets/code.png";
 import portfolioImage from "../../assets/image.png";
+import progressImg from "../../assets/progress.png";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -21,7 +22,7 @@ const projectTranslations = {
     },
     {
       ref: "ecommerce",
-      img: codeImage,
+      img: progressImg,
       title: "E-commerce Platform",
       description:
         "Full-stack e-commerce solution with user authentication, product management, shopping cart functionality, and payment integration. Features responsive design and modern UI/UX.",
@@ -31,7 +32,7 @@ const projectTranslations = {
     },
     {
       ref: "taskmanager",
-      img: codeImage,
+      img: progressImg,
       title: "Task Management App",
       description:
         "A comprehensive task management application with drag-and-drop functionality, real-time collaboration, deadline tracking, and progress visualization. Built with modern web technologies.",
@@ -44,39 +45,6 @@ const projectTranslations = {
       ],
       github: "https://github.com/mikolajdev14/task-manager",
       live: "https://taskmanager-demo.netlify.app",
-    },
-    {
-      ref: "weather",
-      img: codeImage,
-      title: "Weather Dashboard",
-      description:
-        "Interactive weather application with location-based forecasts, weather maps, historical data, and personalized weather alerts. Features beautiful data visualizations and responsive design.",
-      technologies: [
-        "JavaScript",
-        "OpenWeather API",
-        "Chart.js",
-        "CSS Grid",
-        "Geolocation API",
-      ],
-      github: "https://github.com/mikolajdev14/weather-dashboard",
-      live: "https://weather-app-demo.vercel.app",
-    },
-    {
-      ref: "social",
-      img: codeImage,
-      title: "Social Media Platform",
-      description:
-        "Full-featured social media application with user profiles, posts, comments, likes, real-time messaging, and content sharing. Includes advanced features like content moderation and analytics.",
-      technologies: [
-        "React",
-        "Node.js",
-        "Socket.io",
-        "PostgreSQL",
-        "AWS S3",
-        "Redis",
-      ],
-      github: "https://github.com/mikolajdev14/social-platform",
-      live: "https://social-app-demo.herokuapp.com",
     },
   ],
   pl: [
@@ -92,7 +60,7 @@ const projectTranslations = {
     },
     {
       ref: "ecommerce",
-      img: codeImage,
+      img: progressImg,
       title: "Platforma e-commerce",
       description:
         "Pełnostackowe rozwiązanie e-commerce z uwierzytelnianiem użytkowników, zarządzaniem produktami, funkcjonalnością koszyka zakupów i integracją płatności. Funkcje responsywny design i nowoczesny UI/UX.",
@@ -102,7 +70,7 @@ const projectTranslations = {
     },
     {
       ref: "taskmanager",
-      img: codeImage,
+      img: progressImg,
       title: "Aplikacja do zarządzania zadaniami",
       description:
         "Kompleksowa aplikacja do zarządzania zadaniami z funkcją przeciągania i upuszczania, współpracą w czasie rzeczywistym, śledzeniem terminów i wizualizacją postępów. Zbudowana z nowoczesnymi technologiami webowymi.",
@@ -115,39 +83,6 @@ const projectTranslations = {
       ],
       github: "https://github.com/mikolajdev14/task-manager",
       live: "https://taskmanager-demo.netlify.app",
-    },
-    {
-      ref: "weather",
-      img: codeImage,
-      title: "Panel pogodowy",
-      description:
-        "Interaktywna aplikacja pogodowa z prognozami opartymi na lokalizacji, mapami pogody, danymi historycznymi i spersonalizowanymi alertami pogodowymi. Funkcje piękne wizualizacje danych i responsywny design.",
-      technologies: [
-        "JavaScript",
-        "OpenWeather API",
-        "Chart.js",
-        "CSS Grid",
-        "Geolocation API",
-      ],
-      github: "https://github.com/mikolajdev14/weather-dashboard",
-      live: "https://weather-app-demo.vercel.app",
-    },
-    {
-      ref: "social",
-      img: codeImage,
-      title: "Platforma mediów społecznościowych",
-      description:
-        "Pełnofunkcjonalna aplikacja mediów społecznościowych z profilami użytkowników, postami, komentarzami, polubieniami, wiadomościami w czasie rzeczywistym i udostępnianiem treści. Zawiera zaawansowane funkcje jak moderacja treści i analityka.",
-      technologies: [
-        "React",
-        "Node.js",
-        "Socket.io",
-        "PostgreSQL",
-        "AWS S3",
-        "Redis",
-      ],
-      github: "https://github.com/mikolajdev14/social-platform",
-      live: "https://social-app-demo.herokuapp.com",
     },
   ],
 };

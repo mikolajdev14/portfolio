@@ -20,7 +20,7 @@ const contactTranslations = {
     description:
       "Have a project in mind or want to collaborate? Feel free to reach out. I'm always open to discussing new opportunities.",
     contactInfo: "Contact Information",
-    email: "Email: siwieckimiki@gmail.com",
+    email: "Email: mikolajdev14@gmail.com",
     phone: "Phone: +48 578 868 447",
     location: "Localization: Cracow, Poland",
     github: "GitHub",
@@ -40,7 +40,7 @@ const contactTranslations = {
     description:
       "Masz projekt na myśli lub chcesz współpracować? Śmiało napisz. Zawsze jestem otwarty na omawianie nowych możliwości.",
     contactInfo: "Informacje kontaktowe",
-    email: "Email: siwieckimiki@gmail.com",
+    email: "Email: mikolajdev14@gmail.com",
     phone: "Telefon: +48 578 868 447",
     location: "Lokalizacja: Kraków, Polska",
     github: "GitHub",
