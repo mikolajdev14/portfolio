@@ -66,7 +66,6 @@ export function MainPage() {
             y: 0,
             duration: 1,
             ease: "power2.out",
-            force3D: true,
           }
         );
       }
@@ -81,7 +80,6 @@ export function MainPage() {
             duration: 0.6,
             delay: 3.5,
             ease: "back.out(1.7)",
-            force3D: true,
           }
         );
       }
@@ -96,7 +94,6 @@ export function MainPage() {
             duration: 0.6,
             delay: 4,
             ease: "power2.out",
-            force3D: true,
           }
         );
       }
@@ -110,7 +107,6 @@ export function MainPage() {
             y: 0,
             duration: 0.8,
             ease: "power2.out",
-            force3D: true,
             scrollTrigger: {
               trigger: aboutRef.current,
               start: "top 85%",
@@ -132,7 +128,6 @@ export function MainPage() {
             y: 0,
             duration: 0.8,
             ease: "power2.out",
-            force3D: true,
             scrollTrigger: {
               trigger: skillsRef.current,
               start: "top 85%",
@@ -154,7 +149,6 @@ export function MainPage() {
             y: 0,
             duration: 0.8,
             ease: "power2.out",
-            force3D: true,
             scrollTrigger: {
               trigger: projectsRef.current,
               start: "top 85%",
@@ -176,7 +170,6 @@ export function MainPage() {
             y: 0,
             duration: 0.8,
             ease: "power2.out",
-            force3D: true,
             scrollTrigger: {
               trigger: contactRef.current,
               start: "top 85%",

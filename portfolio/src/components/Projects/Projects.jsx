@@ -32,7 +32,6 @@ export function Projects({ language = "en" }) {
             y: 0,
             duration: 0.6,
             ease: "power2.out",
-            force3D: true,
             scrollTrigger: {
               trigger: titleRef.current,
               start: "top 90%",
@@ -52,7 +51,6 @@ export function Projects({ language = "en" }) {
             y: 0,
             duration: 0.6,
             ease: "power2.out",
-            force3D: true,
             scrollTrigger: {
               trigger: carouselRef.current,
               start: "top 85%",
