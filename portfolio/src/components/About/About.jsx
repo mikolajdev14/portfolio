@@ -31,7 +31,7 @@ const aboutTranslations = {
     me: "mnie",
     heading: "Innowacyjny Deweloper Webowy i Architekt Rozwiązań Cyfrowych",
     description:
-      "Kwitam się na przekształcaniu złożonych problemów w eleganckie, skoncentrowane na użytkowniku rozwiązania. Z nieustannym zaangażowaniem w naukę, pozostaję na czele krzywej w technologiach webowych, dostarczając projekty, które nie tylko spełniają oczekiwania, ale je przekraczają.",
+      "Zajmuje się przekształcaniem złożonych problemów w eleganckie, skoncentrowane na użytkowniku rozwiązania. Z nieustannym zaangażowaniem w naukę, pozostaję na czele technologii webowych, dostarczając projekty, które nie tylko spełniają oczekiwania, ale je przekraczają.",
     websites: "Strony internetowe",
     websitesDesc:
       "Tworzenie wizualnie imponujących i wysoce funkcjonalnych stron internetowych przy użyciu nowoczesnych technologii jak React, zapewniając optymalną wydajność i zaangażowanie użytkowników.",

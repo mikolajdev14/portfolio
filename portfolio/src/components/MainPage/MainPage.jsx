@@ -204,7 +204,7 @@ export function MainPage() {
     <div className="MainPageContainer">
       {/* Global fixed NavBar */}
       <div className="NavBar">
-        <div className="Logo">Mikolaj.</div>
+        <div className="Logo">Mikolaj.dev</div>
         <button
           className="MenuToggle"
           aria-label="Toggle navigation menu"
