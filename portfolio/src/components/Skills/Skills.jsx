@@ -66,7 +66,6 @@ export function Skills({ language = "en" }) {
     { name: "MongoDB", icon: faDatabase, category: "Backend", level: 65 },
     { name: "Express", icon: faServer, category: "Backend", level: 70 },
     { name: "Git", icon: faGitAlt, category: "Tools", level: 85 },
-    { name: "Figma", icon: faFigma, category: "Tools", level: 75 },
     { name: "VS Code", icon: faCode, category: "Tools", level: 90 },
     { name: "Webpack", icon: faCog, category: "Tools", level: 60 },
   ];

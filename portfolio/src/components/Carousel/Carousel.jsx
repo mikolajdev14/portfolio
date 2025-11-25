@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import codeImage from "../../assets/code.png";
 import portfolioImage from "../../assets/image.png";
 import progressImg from "../../assets/progress.png";
+import cafeImg from "../../assets/cafe.png";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -29,6 +30,15 @@ const projectTranslations = {
       technologies: ["React", "Node.js", "MongoDB", "Express", "Stripe API"],
       github: "https://github.com/mikolajdev14/ecommerce-platform",
       live: "https://your-ecommerce-demo.com",
+    },
+    {
+      ref: "Cafe Landing Page",
+      img: cafeImg,
+      title: "Cafe Landing Page",
+      description:
+        "A modern landing page for a cafe, built with React, TypeScript, Shadcn UI components, and Tailwind CSS. Features responsive design, animations and elegant UI.",
+      technologies: ["React", "TypeScript", "Shadcn", "Tailwind"],
+      github: "https://github.com/mikolajdev14/Coffe-Shop-Landing-Page",
     },
     {
       ref: "taskmanager",
@@ -67,6 +77,15 @@ const projectTranslations = {
       technologies: ["React", "Node.js", "MongoDB", "Express", "Stripe API"],
       github: "https://github.com/mikolajdev14/ecommerce-platform",
       live: "https://your-ecommerce-demo.com",
+    },
+    {
+      ref: "Cafe Landing Page",
+      img: cafeImg,
+      title: "Strona główna kawiarni",
+      description:
+        "Nowoczesna strona główna kawiarni, zbudowana w React, TypeScript, komponentach Shadcn UI i Tailwind CSS. Ma responsywny design, animacje i elegancki interfejs użytkownika.",
+      technologies: ["React", "TypeScript", "Shadcn", "Tailwind"],
+      github: "https://github.com/mikolajdev14/Coffe-Shop-Landing-Page",
     },
     {
       ref: "taskmanager",
