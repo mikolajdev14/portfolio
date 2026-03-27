@@ -10,3 +10,9 @@ Currently, two official plugins are available:
 ## Expanding the ESLint configuration
 
 If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
+## SEO notes
+
+- Technical SEO is configured in `index.html` (`meta`, Open Graph, Twitter, canonical, JSON-LD).
+- Indexation files are available in `public/robots.txt` and `public/sitemap.xml`.
+- Full deployment + monitoring checklist is in `SEO_CHECKLIST.md`.

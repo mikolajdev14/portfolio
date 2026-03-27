@@ -20,9 +20,9 @@ const translations = {
     skills: "Skills",
     projects: "Projects",
     contact: "Contact",
-    greeting: "Hi ! I'm Mikołaj Siwiecki",
+    greeting: "Hi ! I'm Mikołaj",
     subtitle:
-      "I make web application and websites. Specializing in front-end but also know back-end.",
+      "I create modern websites and applications that help businesses attract more customers online.",
     viewWork: "View My Work",
     scroll: "Scroll",
   },
@@ -32,22 +32,63 @@ const translations = {
     skills: "Umiejętności",
     projects: "Projekty",
     contact: "Kontakt",
-    greeting: "Cześć! Jestem Mikołaj Siwiecki",
+    greeting: "Cześć! Jestem Mikołaj",
     subtitle:
-      "Tworzę aplikacje webowe i strony internetowe. Specjalizuję się w front-endzie, ale znam też back-end.",
+      "Tworzę nowoczesne strony i aplikacje, które pomagają firmom zdobywać więcej klientów online.",
     viewWork: "Zobacz moje prace",
     scroll: "Przewiń",
   },
 };
 
+const seoTranslations = {
+  en: {
+    title: "Mikołaj Siwiecki | Front-End Developer",
+    description:
+      "I create modern websites and web applications that help businesses attract more customers online.",
+    ogLocale: "en_US",
+  },
+  pl: {
+    title: "Mikołaj Siwiecki | Front-End Developer",
+    description:
+      "Tworzę nowoczesne strony i aplikacje webowe, które pomagają firmom zdobywać więcej klientów online.",
+    ogLocale: "pl_PL",
+  },
+};
+
+function upsertMetaAttribute(attributeName, attributeValue, content) {
+  let tag = document.querySelector(
+    `meta[${attributeName}="${attributeValue}"]`,
+  );
+  if (!tag) {
+    tag = document.createElement("meta");
+    tag.setAttribute(attributeName, attributeValue);
+    document.head.appendChild(tag);
+  }
+  tag.setAttribute("content", content);
+}
+
+function upsertCanonical(url) {
+  let canonical = document.querySelector('link[rel="canonical"]');
+  if (!canonical) {
+    canonical = document.createElement("link");
+    canonical.setAttribute("rel", "canonical");
+    document.head.appendChild(canonical);
+  }
+  canonical.setAttribute("href", url);
+}
+
 export function MainPage() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [language, setLanguage] = useState("en");
+  const [compactNav, setCompactNav] = useState(false);
+
+  const navBarRef = useRef(null);
+  const logoRef = useRef(null);
+  const linksRef = useRef(null);
+  const languageBtnRef = useRef(null);
 
   // Refs for animations
   const welcomeRef = useRef(null);
-  const textTypeRef = useRef(null);
-  const smTextTypeRef = useRef(null);
   const buttonRef = useRef(null);
   const scrollBoxRef = useRef(null);
   const aboutRef = useRef(null);
@@ -66,7 +107,7 @@ export function MainPage() {
             y: 0,
             duration: 1,
             ease: "power2.out",
-          }
+          },
         );
       }
 
@@ -80,7 +121,7 @@ export function MainPage() {
             duration: 0.6,
             delay: 3.5,
             ease: "back.out(1.7)",
-          }
+          },
         );
       }
 
@@ -94,7 +135,7 @@ export function MainPage() {
             duration: 0.6,
             delay: 4,
             ease: "power2.out",
-          }
+          },
         );
       }
 
@@ -115,7 +156,7 @@ export function MainPage() {
               fastScrollEnd: true,
               preventOverlaps: true,
             },
-          }
+          },
         );
       }
 
@@ -136,7 +177,7 @@ export function MainPage() {
               fastScrollEnd: true,
               preventOverlaps: true,
             },
-          }
+          },
         );
       }
 
@@ -157,7 +198,7 @@ export function MainPage() {
               fastScrollEnd: true,
               preventOverlaps: true,
             },
-          }
+          },
         );
       }
 
@@ -178,7 +219,7 @@ export function MainPage() {
               fastScrollEnd: true,
               preventOverlaps: true,
             },
-          }
+          },
         );
       }
 
@@ -200,22 +241,108 @@ export function MainPage() {
       });
     };
   }, []);
+
+  useEffect(() => {
+    const updateCompactNav = () => {
+      if (
+        !navBarRef.current ||
+        !logoRef.current ||
+        !linksRef.current ||
+        !languageBtnRef.current
+      ) {
+        return;
+      }
+
+      const navWidth = navBarRef.current.clientWidth;
+      const logoWidth = logoRef.current.getBoundingClientRect().width;
+      const languageBtnWidth =
+        languageBtnRef.current.getBoundingClientRect().width;
+
+      const linksElement = linksRef.current;
+      const previousDisplay = linksElement.style.display;
+      const previousPosition = linksElement.style.position;
+      const previousVisibility = linksElement.style.visibility;
+
+      linksElement.style.display = "flex";
+      linksElement.style.position = "static";
+      linksElement.style.visibility = "hidden";
+      const linksWidth = linksElement.scrollWidth;
+      linksElement.style.display = previousDisplay;
+      linksElement.style.position = previousPosition;
+      linksElement.style.visibility = previousVisibility;
+
+      const navStyles = window.getComputedStyle(navBarRef.current);
+      const paddingX =
+        parseFloat(navStyles.paddingLeft) + parseFloat(navStyles.paddingRight);
+      const gapValue = parseFloat(navStyles.columnGap || navStyles.gap || "0");
+      const reservedSpace = gapValue * 2 + 24;
+
+      const requiredWidth =
+        logoWidth + linksWidth + languageBtnWidth + paddingX + reservedSpace;
+
+      const shouldUseCompact =
+        window.innerWidth <= 768 ||
+        (window.innerWidth <= 860 && requiredWidth > navWidth + 8);
+      setCompactNav(shouldUseCompact);
+    };
+
+    updateCompactNav();
+    window.addEventListener("resize", updateCompactNav);
+
+    return () => {
+      window.removeEventListener("resize", updateCompactNav);
+    };
+  }, [language]);
+
+  useEffect(() => {
+    if (!compactNav) {
+      setMenuOpen(false);
+    }
+  }, [compactNav]);
+
+  useEffect(() => {
+    const seo = seoTranslations[language];
+
+    document.documentElement.lang = language;
+    document.title = seo.title;
+
+    upsertMetaAttribute("name", "description", seo.description);
+    upsertMetaAttribute("property", "og:title", seo.title);
+    upsertMetaAttribute("property", "og:description", seo.description);
+    upsertMetaAttribute("property", "og:locale", seo.ogLocale);
+    upsertMetaAttribute("name", "twitter:title", seo.title);
+    upsertMetaAttribute("name", "twitter:description", seo.description);
+
+    if (typeof window !== "undefined") {
+      upsertCanonical(`${window.location.origin}/`);
+      upsertMetaAttribute("property", "og:url", `${window.location.origin}/`);
+    }
+  }, [language]);
+
   return (
     <div className="MainPageContainer">
       {/* Global fixed NavBar */}
-      <div className="NavBar">
-        <div className="Logo">Mikolaj.dev</div>
+      <div className={`NavBar ${compactNav ? "compact" : ""}`} ref={navBarRef}>
+        <div className="Logo" ref={logoRef}>
+          Mikolaj.dev
+        </div>
         <button
           className="MenuToggle"
           aria-label="Toggle navigation menu"
           aria-expanded={menuOpen}
+          aria-controls="main-navigation"
           onClick={() => setMenuOpen((v) => !v)}
           type="button"
         >
           ☰
         </button>
-        <div
+        <nav
+          id="main-navigation"
+          ref={linksRef}
           className={`Links ${menuOpen ? "open" : ""}`}
+          aria-label={
+            language === "pl" ? "Nawigacja główna" : "Main navigation"
+          }
           onClick={() => setMenuOpen(false)}
         >
           <a href="#home">{translations[language].home}</a>
@@ -224,11 +351,12 @@ export function MainPage() {
           <a href="#projects">{translations[language].projects}</a>
 
           <a href="#contact">{translations[language].contact}</a>
-        </div>
+        </nav>
         <button
           className="language-btn"
           onClick={() => setLanguage(language === "en" ? "pl" : "en")}
           title="Switch Language"
+          ref={languageBtnRef}
         >
           {language === "en" ? "PL" : "EN"}
         </button>
@@ -252,6 +380,11 @@ export function MainPage() {
 
       {/* Welcome Section - Centered in viewport */}
       <div className="WelcomeSection" id="home" ref={welcomeRef}>
+        <h1 className="sr-only">
+          {language === "pl"
+            ? "Mikołaj Siwiecki - Front-End Developer"
+            : "Mikołaj Siwiecki - Front-End Developer"}
+        </h1>
         <div className="welcomeContainer">
           <TextType
             key={`greeting-${language}`}

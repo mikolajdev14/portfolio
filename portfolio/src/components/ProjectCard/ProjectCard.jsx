@@ -15,7 +15,12 @@ export function ProjectCard({ project, language = "en" }) {
   return (
     <div className="project">
       <div className="project-image">
-        <img src={project.img} alt={project.title || project.description} />
+        <img
+          src={project.img}
+          alt={project.title || project.description}
+          loading="lazy"
+          decoding="async"
+        />
       </div>
 
       <div className="project-content">
