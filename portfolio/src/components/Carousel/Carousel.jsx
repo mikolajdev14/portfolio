@@ -4,6 +4,7 @@ import codeImage from "../../assets/code.png";
 import portfolioImage from "../../assets/image.png";
 import progressImg from "../../assets/progress.png";
 import cafeImg from "../../assets/cafe.png";
+import personalTrainer from "../../assets/personal-trainer-site.png";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -19,7 +20,7 @@ const projectTranslations = {
         "A modern, responsive portfolio website built with React, featuring smooth animations, interactive elements, and a clean design. Includes sections for projects, skills, and contact information.",
       technologies: ["React", "JavaScript", "CSS", "GSAP", "Lenis"],
       github: "https://github.com/mikolajdev14/portfolio",
-      live: "https://mikolajdev14.github.io/portfolio",
+      live: "https://mikolajdev.netlify.app",
     },
     {
       ref: "ecommerce",
@@ -29,7 +30,6 @@ const projectTranslations = {
         "Full-stack e-commerce solution with user authentication, product management, shopping cart functionality, and payment integration. Features responsive design and modern UI/UX.",
       technologies: ["React", "Node.js", "MongoDB", "Express", "Stripe API"],
       github: "https://github.com/mikolajdev14/ecommerce-platform",
-      live: "https://your-ecommerce-demo.com",
     },
     {
       ref: "Cafe Landing Page",
@@ -54,7 +54,15 @@ const projectTranslations = {
         "React DnD",
       ],
       github: "https://github.com/mikolajdev14/task-manager",
-      live: "https://taskmanager-demo.netlify.app",
+    },
+    {
+      ref: "Personal Trainer Website",
+      img: personalTrainer,
+      title: "Personal Trainer Website",
+      description:
+        "A modern website for a personal trainer, built with Next.js, TypeScript, and Tailwind CSS. Features responsive design, animations, and an elegant UI.",
+      technologies: ["Next.js", "TypeScript", "Tailwind CSS"],
+      github: "https://github.com/mikolajdev14/personal-trainer-example-page",
     },
   ],
   pl: [
@@ -66,7 +74,7 @@ const projectTranslations = {
         "Nowoczesna, responsywna strona portfolio zbudowana w React, z płynnymi animacjami, interaktywnymi elementami i czystym designem. Zawiera sekcje projektów, umiejętności i informacje kontaktowe.",
       technologies: ["React", "JavaScript", "CSS", "GSAP", "Lenis"],
       github: "https://github.com/mikolajdev14/portfolio",
-      live: "https://mikolajdev14.github.io/portfolio",
+      live: "https://mikolajdev.netlify.app/",
     },
     {
       ref: "ecommerce",
@@ -76,7 +84,6 @@ const projectTranslations = {
         "Pełnostackowe rozwiązanie e-commerce z uwierzytelnianiem użytkowników, zarządzaniem produktami, funkcjonalnością koszyka zakupów i integracją płatności. Funkcje responsywny design i nowoczesny UI/UX.",
       technologies: ["React", "Node.js", "MongoDB", "Express", "Stripe API"],
       github: "https://github.com/mikolajdev14/ecommerce-platform",
-      live: "https://your-ecommerce-demo.com",
     },
     {
       ref: "Cafe Landing Page",
@@ -101,7 +108,15 @@ const projectTranslations = {
         "React DnD",
       ],
       github: "https://github.com/mikolajdev14/task-manager",
-      live: "https://taskmanager-demo.netlify.app",
+    },
+    {
+      ref: "Personal Trainer Website",
+      img: personalTrainer,
+      title: "Strona dla trenera personalnego",
+      description:
+        "Nowoczesna strona dla trenera personalnego, zbudowana w Next.js, TypeScript i Tailwind CSS. Oferuje responsywny design, animacje i elegancki interfejs użytkownika.",
+      technologies: ["Next.js", "TypeScript", "Tailwind CSS"],
+      github: "https://github.com/mikolajdev14/personal-trainer-example-page",
     },
   ],
 };
