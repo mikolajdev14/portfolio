@@ -4,7 +4,10 @@
   flex-direction: column;
   align-items: center;
   padding: 3rem clamp(1rem, 4vw, 2rem) 1.25rem;
+  padding-left: max(1rem, env(safe-area-inset-left, 0px));
+  padding-right: max(1rem, env(safe-area-inset-right, 0px));
   perspective: 1200px;
+  box-sizing: border-box;
 }
 
 .skills-header {
@@ -245,24 +248,82 @@
 
 @media (max-width: 768px) {
   .skills-container {
-    padding-top: 2.25rem;
+    padding-top: 2rem;
     padding-bottom: 1rem;
+    padding-left: var(--phone-gutter, 1rem);
+    padding-right: var(--phone-gutter, 1rem);
   }
 
   .skills-header {
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
+    max-width: var(--phone-text-max, 36rem);
+  }
+
+  .skills-title {
+    font-size: clamp(1.35rem, 5.5vw, 1.75rem);
+    margin-bottom: 0.65rem;
+  }
+
+  .skills-subtitle {
+    font-size: 0.875rem;
+    line-height: 1.55;
+  }
+
+  .skills-hint {
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
+  }
+
+  .skills-bento {
+    max-width: 100%;
+  }
+
+  .skills-panel {
+    padding: 1.1rem 1rem 1.25rem;
+    border-radius: 18px;
+  }
+
+  .skills-panel__title {
+    font-size: 1rem;
+  }
+
+  .skills-panel__badge {
+    font-size: 0.6rem;
+    padding: 0.28rem 0.5rem;
   }
 
   .skills-chip-cloud {
-    gap: 0.45rem;
+    gap: 0.4rem;
   }
 
   .skills-chip {
-    padding: 0.38rem 0.65rem 0.38rem 0.58rem;
+    padding: 0.35rem 0.6rem 0.35rem 0.52rem;
   }
 
   .skills-chip__name {
-    font-size: 0.78rem;
+    font-size: 0.74rem;
+  }
+
+  .skills-chip__icon {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .skills-title {
+    font-size: 1.3rem;
+  }
+
+  .skills-subtitle {
+    font-size: 0.8125rem;
+  }
+
+  .skills-panel {
+    padding: 1rem 0.85rem 1.15rem;
+  }
+
+  .skills-chip__name {
+    font-size: 0.7rem;
   }
 }
 

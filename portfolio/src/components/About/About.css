@@ -110,34 +110,75 @@ h2 {
 
 @media (max-width: 768px) {
   .about-container {
-    padding: 1.5rem 1rem 1rem 1rem;
+    padding: 1.35rem var(--phone-gutter, 1rem) 1.25rem;
+    box-sizing: border-box;
   }
   .aboutBox {
-    width: 92%;
+    width: 100%;
+    max-width: var(--phone-text-max, 36rem);
     flex-direction: column;
   }
+  .aboutTitle {
+    font-size: clamp(1.35rem, 5vw, 1.7rem);
+    margin-top: 1rem;
+    margin-bottom: 1.35rem;
+    padding: 0 0.25rem;
+  }
   .msgContainer {
+    padding: 1.15rem;
+    font-size: 0.9rem;
+    line-height: 1.6;
     margin-bottom: 15px;
   }
+  .msgContainer h2 {
+    font-size: 1.05rem;
+    line-height: 1.35;
+    margin-bottom: 0.65rem;
+  }
+  .msgContainer p {
+    font-size: 0.9rem;
+    line-height: 1.58;
+  }
+  .box > div {
+    font-size: 0.9rem;
+    padding: 0.9rem;
+    line-height: 1.45;
+  }
+  .box h4 {
+    font-size: 0.95rem;
+  }
+  .box p {
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
+
   .box {
     display: grid;
     grid-template-columns: 1fr;
     grid-gap: 15px;
   }
-  .aboutTitle {
-    font-size: 1.75rem;
-    margin-top: 1.5rem;
-    margin-bottom: 2rem;
-  }
 }
 
 @media (max-width: 480px) {
   .about-container {
-    padding: 1rem 0.5rem 0.5rem 0.5rem;
+    padding: 1rem var(--phone-gutter, 0.875rem) 1rem;
   }
   .aboutTitle {
-    font-size: 1.5rem;
-    margin-top: 1rem;
-    margin-bottom: 1.5rem;
+    font-size: 1.28rem;
+    margin-bottom: 1.15rem;
+  }
+  .msgContainer {
+    padding: 1rem;
+    font-size: 0.875rem;
+  }
+  .msgContainer h2 {
+    font-size: 1rem;
+  }
+  .box > div {
+    font-size: 0.875rem;
+    padding: 0.8rem;
+  }
+  .box p {
+    font-size: 0.8125rem;
   }
 }

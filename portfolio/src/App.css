@@ -10,6 +10,9 @@
   --glass-border: rgba(255, 255, 255, 0.16);
   --glass-highlight: rgba(255, 255, 255, 0.06);
   --text-muted: rgba(255, 255, 255, 0.72);
+  /* Readable line length & gutters on small screens */
+  --phone-gutter: clamp(0.75rem, 4.2vw, 1.125rem);
+  --phone-text-max: 36rem;
 }
 
 * {
@@ -34,6 +37,8 @@
 html {
   height: 100%;
   background-color: var(--bg-deep);
+  max-width: 100%;
+  overflow-x: clip;
 }
 
 ::selection {
@@ -52,18 +57,21 @@ body {
     "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
+  overflow-x: clip;
   overflow-y: auto;
   min-height: 100vh;
+  max-width: 100%;
 }
 
 #root {
   width: 100%;
+  max-width: 100%;
   min-height: 100vh;
   min-height: 100dvh;
   margin: 0;
   padding: 0;
   background: var(--bg-deep);
+  overflow-x: clip;
 }
 
 .light-rays-container {
@@ -106,6 +114,14 @@ body {
   left: 50%;
   transform: translateX(-50%);
   z-index: 2;
+}
+
+.NavBar-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.4rem;
+  flex-shrink: 0;
 }
 
 .Logo {
@@ -162,11 +178,15 @@ body {
     transform 0.25s ease;
   border-radius: 10px;
   flex-shrink: 0;
-  margin-left: 1rem;
 }
 
 .NavBar.compact {
   gap: 0.5rem;
+  justify-content: flex-start;
+}
+
+.NavBar.compact .Logo {
+  margin-right: auto;
 }
 
 .NavBar.compact .MenuToggle {
@@ -176,21 +196,22 @@ body {
 .NavBar.compact .Links {
   display: none;
   position: absolute;
-  top: 60px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(20, 19, 19, 0.85);
+  top: calc(100% + 0.5rem);
+  right: 0;
+  left: auto;
+  transform: none;
+  background: rgba(20, 19, 19, 0.92);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.55);
   border-radius: 12px;
-  padding: 0.75rem;
+  padding: 0.65rem;
   flex-direction: column;
-  gap: 0.4rem;
-  width: 90%;
-  max-width: 420px;
+  gap: 0.35rem;
+  width: min(calc(100vw - 1.25rem), 280px);
+  max-width: calc(100vw - 1.25rem);
   z-index: 3;
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
-  animation: dropdownFade 200ms ease forwards;
+  animation: navDropdownIn 200ms ease forwards;
 }
 
 .NavBar.compact .Links.open {
@@ -200,8 +221,9 @@ body {
 .NavBar.compact .Links a {
   display: block;
   text-align: center;
-  padding: 0.6rem 0.8rem;
+  padding: 0.55rem 0.75rem;
   border-radius: 8px;
+  font-size: 0.82rem;
 }
 
 .NavBar.compact .Links a:hover {
@@ -413,62 +435,154 @@ body {
 
 .MenuToggle {
   display: none;
-  background: none;
-  border: none;
-  font-size: 1.5rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--glass-border);
   color: white;
   cursor: pointer;
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
+  padding: 0.45rem;
+  border-radius: 10px;
+  line-height: 0;
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.MenuToggle-lines {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  gap: 5px;
+  width: 22px;
+  height: 18px;
+}
+
+.MenuToggle-line {
+  display: block;
+  height: 2px;
+  width: 100%;
+  border-radius: 2px;
+  background: currentColor;
+  transition:
+    transform 0.25s ease,
+    opacity 0.2s ease,
+    translate 0.25s ease;
+  transform-origin: center;
+}
+
+.MenuToggle--open .MenuToggle-line:nth-child(1) {
+  translate: 0 7px;
+  transform: rotate(45deg);
+}
+
+.MenuToggle--open .MenuToggle-line:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.MenuToggle--open .MenuToggle-line:nth-child(3) {
+  translate: 0 -7px;
+  transform: rotate(-45deg);
+}
+
+.MenuToggle:hover,
+.MenuToggle:focus-visible {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.28);
+  outline: none;
+}
+
+.MenuToggle--open {
+  background: rgba(157, 3, 252, 0.18);
+  border-color: rgba(157, 3, 252, 0.45);
 }
 
 @media (max-width: 768px) {
   .NavBar {
-    width: 92%;
-    padding: 0.6rem 1rem;
+    width: min(
+      calc(
+        100vw - 1rem - env(safe-area-inset-left, 0px) -
+          env(safe-area-inset-right, 0px)
+      ),
+      1080px
+    );
+    max-width: calc(
+      100vw - 1rem - env(safe-area-inset-left, 0px) -
+        env(safe-area-inset-right, 0px)
+    );
+    padding: 0.5rem 0.65rem;
+    margin: 0.65rem auto 0;
+    border-radius: 14px;
+    gap: 0.45rem;
   }
   .Logo {
-    font-size: 1.25rem;
+    font-size: 1.05rem;
   }
-  .welcomeContainer {
-    margin: 1.5rem auto;
-  }
-  .TextType {
-    font-size: 2.25rem;
-    text-align: center;
-  }
-  .smTextType {
-    font-size: 1.1rem;
-  }
-  .VMWbutton {
-    font-size: 1rem;
-    padding: 8px 16px;
-  }
-  .NavBar {
-    gap: 0.5rem;
+  .language-btn {
+    font-size: 0.78rem;
+    padding: 0.38rem 0.55rem;
+    margin-left: 0.45rem;
   }
   .MenuToggle {
     display: block;
+    font-size: 1.3rem;
+    padding: 0.35rem 0.55rem;
+  }
+  .welcomeContainer {
+    margin: 1.25rem auto;
+    padding: 0 var(--phone-gutter);
+    width: 100%;
+    max-width: var(--phone-text-max);
+  }
+  .WelcomeSection {
+    padding-left: var(--phone-gutter);
+    padding-right: var(--phone-gutter);
+    box-sizing: border-box;
+  }
+  .TextType {
+    font-size: clamp(1.35rem, 6.8vw, 1.85rem);
+    line-height: 1.15;
+    text-align: center;
+  }
+  .smTextType {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    max-width: 34ch;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .VMWbutton {
+    font-size: 0.82rem;
+    padding: 0.55rem 1.15rem;
+    letter-spacing: 0.04em;
+    margin-top: 1.25rem;
+  }
+  .scrollBox {
+    bottom: max(0.75rem, env(safe-area-inset-bottom, 0px));
+    font-size: 0.75rem;
+    gap: 0.25rem;
   }
 
   .Links {
     display: none;
     position: absolute;
-    top: 60px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(20, 19, 19, 0.85);
+    top: calc(100% + 0.5rem);
+    right: 0;
+    left: auto;
+    transform: none;
+    background: rgba(20, 19, 19, 0.92);
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.55);
     border-radius: 12px;
-    padding: 0.75rem;
+    padding: 0.65rem;
     flex-direction: column;
-    gap: 0.4rem;
-    width: 90%;
-    max-width: 420px;
+    gap: 0.35rem;
+    width: min(calc(100vw - 1.25rem), 280px);
+    max-width: calc(100vw - 1.25rem);
     z-index: 3;
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
-    animation: dropdownFade 200ms ease forwards;
+    animation: navDropdownIn 200ms ease forwards;
   }
   .Links.open {
     display: flex;
@@ -476,8 +590,9 @@ body {
   .Links a {
     display: block;
     text-align: center;
-    padding: 0.6rem 0.8rem;
+    padding: 0.55rem 0.75rem;
     border-radius: 8px;
+    font-size: 0.82rem;
   }
   .Links a:hover {
     background: rgba(255, 255, 255, 0.12);
@@ -490,35 +605,58 @@ body {
   }
 }
 
-@keyframes dropdownFade {
+@keyframes navDropdownIn {
   from {
     opacity: 0;
-    transform: translate(-50%, -6px);
+    transform: translateY(-6px);
   }
   to {
     opacity: 1;
-    transform: translate(-50%, 0);
+    transform: translateY(0);
   }
 }
 
 @media (max-width: 480px) {
   .NavBar {
-    width: 95%;
+    width: min(
+      calc(
+        100vw - 0.75rem - env(safe-area-inset-left, 0px) -
+          env(safe-area-inset-right, 0px)
+      ),
+      1080px
+    );
+    max-width: calc(
+      100vw - 0.75rem - env(safe-area-inset-left, 0px) -
+        env(safe-area-inset-right, 0px)
+    );
     border-radius: 12px;
+    padding: 0.42rem 0.5rem;
+    margin-top: 0.5rem;
+  }
+  .Logo {
+    font-size: 0.98rem;
   }
   .Links {
-    gap: 0.5rem;
+    gap: 0.35rem;
+    width: min(calc(100vw - 1rem), 360px);
+    padding: 0.55rem;
   }
   .Links a {
-    padding: 0.4rem 0.6rem;
+    padding: 0.48rem 0.65rem;
+    font-size: 0.78rem;
   }
   .welcomeContainer {
     margin: 1rem auto;
   }
   .TextType {
-    font-size: 1.8rem;
+    font-size: clamp(1.2rem, 6.2vw, 1.52rem);
   }
   .smTextType {
-    font-size: 1rem;
+    font-size: 0.875rem;
+    max-width: 32ch;
+  }
+  .VMWbutton {
+    font-size: 0.78rem;
+    padding: 0.5rem 1rem;
   }
 }

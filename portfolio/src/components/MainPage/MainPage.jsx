@@ -330,16 +330,6 @@ export function MainPage() {
         <div className="Logo" ref={logoRef}>
           Mikolaj.dev
         </div>
-        <button
-          className="MenuToggle"
-          aria-label="Toggle navigation menu"
-          aria-expanded={menuOpen}
-          aria-controls="main-navigation"
-          onClick={() => setMenuOpen((v) => !v)}
-          type="button"
-        >
-          ☰
-        </button>
         <nav
           id="main-navigation"
           ref={linksRef}
@@ -356,14 +346,30 @@ export function MainPage() {
 
           <a href="#contact">{translations[language].contact}</a>
         </nav>
-        <button
-          className="language-btn"
-          onClick={() => setLanguage(language === "en" ? "pl" : "en")}
-          title="Switch Language"
-          ref={languageBtnRef}
-        >
-          {language === "en" ? "PL" : "EN"}
-        </button>
+        <div className="NavBar-actions">
+          <button
+            className={`MenuToggle ${menuOpen ? "MenuToggle--open" : ""}`}
+            aria-label="Toggle navigation menu"
+            aria-expanded={menuOpen}
+            aria-controls="main-navigation"
+            onClick={() => setMenuOpen((v) => !v)}
+            type="button"
+          >
+            <span className="MenuToggle-lines" aria-hidden>
+              <span className="MenuToggle-line" />
+              <span className="MenuToggle-line" />
+              <span className="MenuToggle-line" />
+            </span>
+          </button>
+          <button
+            className="language-btn"
+            onClick={() => setLanguage(language === "en" ? "pl" : "en")}
+            title="Switch Language"
+            ref={languageBtnRef}
+          >
+            {language === "en" ? "PL" : "EN"}
+          </button>
+        </div>
       </div>
 
       {/* LightRays as background */}

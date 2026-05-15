@@ -1,7 +1,6 @@
 import "./Carousel.css";
 import { useState, useEffect } from "react";
 import portfolioImage from "../../assets/image.png";
-import progressImg from "../../assets/progress.png";
 import cafeImg from "../../assets/cafe.png";
 import personalTrainer from "../../assets/trenerPersonalny.png";
 import productPage from "../../assets/ProductPage.png";
@@ -127,12 +126,18 @@ export function Carousel({ language = "en" }) {
 
   return isMobile ? (
     <div
+      className="carousel-mobile-stack"
       style={{
         display: "flex",
         flexDirection: "column",
-        gap: "2rem",
+        gap: "1.35rem",
         alignItems: "center",
-        padding: "0 1rem",
+        width: "100%",
+        maxWidth: "var(--phone-text-max, 36rem)",
+        margin: "0 auto",
+        paddingLeft: "max(var(--phone-gutter, 1rem), env(safe-area-inset-left, 0px))",
+        paddingRight: "max(var(--phone-gutter, 1rem), env(safe-area-inset-right, 0px))",
+        boxSizing: "border-box",
       }}
     >
       {projects.map((project, index) => (

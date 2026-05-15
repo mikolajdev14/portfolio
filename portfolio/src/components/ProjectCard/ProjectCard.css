@@ -304,44 +304,16 @@
 
 @media (max-width: 768px) {
   .project {
-    padding: 1.5rem;
-    max-width: 280px;
-    height: 460px;
+    width: 100%;
+    max-width: min(300px, 100%);
+    height: auto;
+    min-height: 420px;
+    max-height: none;
   }
 
   .project-image {
-    height: 185px;
-  }
-
-  .project-title {
-    font-size: 1.2rem;
-  }
-
-  .project-description {
-    font-size: 0.9rem;
-  }
-
-  .tech-tag {
-    font-size: 0.75rem;
-    padding: 0.25rem 0.6rem;
-  }
-
-  .project-link {
-    font-size: 0.85rem;
-    padding: 0.5rem 1rem;
-    min-width: 90px;
-  }
-}
-
-@media (max-width: 480px) {
-  .project {
-    padding: 1.2rem;
-    max-width: 260px;
-    height: 420px;
-  }
-
-  .project-image {
-    height: 155px;
+    height: 175px;
+    flex-shrink: 0;
   }
 
   .project-title {
@@ -349,30 +321,54 @@
   }
 
   .project-description {
-    font-size: 0.85rem;
-  }
-
-  .project-technologies {
-    gap: 0.4rem;
+    font-size: 0.875rem;
+    line-height: 1.42;
+    max-height: 11rem;
   }
 
   .tech-tag {
-    font-size: 0.7rem;
-    padding: 0.2rem 0.5rem;
-  }
-
-  .project-links {
-    gap: 0.6rem;
+    font-size: 0.72rem;
+    padding: 0.22rem 0.55rem;
   }
 
   .project-link {
     font-size: 0.8rem;
-    padding: 0.4rem 0.8rem;
-    min-width: 80px;
+    padding: 0.48rem 0.9rem;
+    min-width: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .project {
+    max-width: 100%;
+    min-height: 400px;
+    padding: 1.1rem;
+  }
+
+  .project-image {
+    height: 160px;
+  }
+
+  .project-title {
+    font-size: 1.02rem;
+  }
+
+  .project-description {
+    font-size: 0.8125rem;
+    max-height: 10rem;
+  }
+
+  .project-links {
+    gap: 0.5rem;
+  }
+
+  .project-link {
+    font-size: 0.76rem;
+    padding: 0.42rem 0.75rem;
   }
 
   .project-lightbox {
-    padding: 0.75rem;
+    padding: max(0.65rem, env(safe-area-inset-top, 0px)) max(0.65rem, env(safe-area-inset-right, 0px)) max(0.65rem, env(safe-area-inset-bottom, 0px)) max(0.65rem, env(safe-area-inset-left, 0px));
   }
 
   .project-lightbox-content {

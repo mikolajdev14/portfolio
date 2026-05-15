@@ -83,15 +83,19 @@
 
 @media (max-width: 768px) {
   .ProjectsContainer {
-    padding: 0.35rem 1rem 1rem 1rem;
+    padding: 0.35rem var(--phone-gutter, 1rem) 1rem;
+    box-sizing: border-box;
   }
   .carouselContainer {
-    width: 95%;
+    width: 100%;
+    max-width: var(--phone-text-max, 36rem);
+    padding: 0;
   }
   .projectsTitle {
-    font-size: 1.75rem;
+    font-size: clamp(1.35rem, 5vw, 1.65rem);
     margin-top: 0.35rem;
-    margin-bottom: 1.75rem;
+    margin-bottom: 1.35rem;
+    padding: 0 0.25rem;
   }
 
   .carouselFallback {
@@ -105,14 +109,13 @@
 
 @media (max-width: 480px) {
   .ProjectsContainer {
-    padding: 0.25rem 0.5rem 0.5rem 0.5rem;
+    padding: 0.25rem var(--phone-gutter, 0.875rem) 0.75rem;
   }
   .carouselContainer {
     width: 100%;
   }
   .projectsTitle {
-    font-size: 1.5rem;
-    margin-top: 0.25rem;
-    margin-bottom: 1.35rem;
+    font-size: 1.28rem;
+    margin-bottom: 1.15rem;
   }
 }
