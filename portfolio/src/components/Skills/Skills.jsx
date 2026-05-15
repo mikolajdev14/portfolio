@@ -1,10 +1,11 @@
 ﻿import "./Skills.css";
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
+
 import {
   faCss3,
   faHtml5,
@@ -15,7 +16,6 @@ import {
   faGitAlt,
   faBootstrap,
   faSass,
-  faFigma,
 } from "@fortawesome/free-brands-svg-icons";
 import {
   faDatabase,
@@ -24,211 +24,253 @@ import {
   faCog,
 } from "@fortawesome/free-solid-svg-icons";
 
+const CATEGORY_ORDER = ["Frontend", "Backend", "Tools"];
+
 const skillsTranslations = {
   en: {
     title: "My",
     skills: "Skills",
-    all: "All",
-    frontend: "Frontend",
-    backend: "Backend",
-    tools: "Tools",
+    subtitle: "Technologies I use to design and ship web experiences.",
+    stackHint: "Hover a tag to see proficiency.",
+    categoryLabels: {
+      Frontend: "Frontend",
+      Backend: "Backend",
+      Tools: "Workflow & tooling",
+    },
+    countUnit: "items",
   },
   pl: {
     title: "Moje",
     skills: "Umiejętności",
-    all: "Wszystkie",
-    frontend: "Frontend",
-    backend: "Backend",
-    tools: "Narzędzia",
+    subtitle:
+      "Technologie, z którymi projektuję i wdrażam strony oraz aplikacje.",
+    stackHint: "Najedź na znacznik, aby zobaczyć poziom biegłości.",
+    categoryLabels: {
+      Frontend: "Frontend",
+      Backend: "Backend",
+      Tools: "Narzędzia i workflow",
+    },
+    countUnit: "pozycji",
   },
 };
 
+const skillsData = [
+  { name: "JavaScript", icon: faJs, category: "Frontend", level: 90 },
+  { name: "React", icon: faReact, category: "Frontend", level: 85 },
+  { name: "HTML5", icon: faHtml5, category: "Frontend", level: 95 },
+  { name: "CSS3", icon: faCss3, category: "Frontend", level: 90 },
+  { name: "SASS", icon: faSass, category: "Frontend", level: 80 },
+  { name: "Bootstrap", icon: faBootstrap, category: "Frontend", level: 85 },
+  { name: "Node.js", icon: faNodeJs, category: "Backend", level: 75 },
+  { name: "Python", icon: faPython, category: "Backend", level: 70 },
+  { name: "MongoDB", icon: faDatabase, category: "Backend", level: 65 },
+  { name: "Express", icon: faServer, category: "Backend", level: 70 },
+  { name: "Git", icon: faGitAlt, category: "Tools", level: 85 },
+  { name: "VS Code", icon: faCode, category: "Tools", level: 90 },
+  { name: "Webpack", icon: faCog, category: "Tools", level: 60 },
+];
+
 export function Skills({ language = "en" }) {
-  const [activeFilter, setActiveFilter] = useState("All");
-
+  const rootRef = useRef(null);
   const titleRef = useRef(null);
-  const navRef = useRef(null);
-  const skillsRef = useRef(null);
+  const subtitleRef = useRef(null);
+  const hintRef = useRef(null);
 
   useEffect(() => {
-    setActiveFilter("All");
-  }, [language]);
+    const root = rootRef.current;
+    if (!root) return undefined;
 
-  const skillsData = [
-    { name: "JavaScript", icon: faJs, category: "Frontend", level: 90 },
-    { name: "React", icon: faReact, category: "Frontend", level: 85 },
-    { name: "HTML5", icon: faHtml5, category: "Frontend", level: 95 },
-    { name: "CSS3", icon: faCss3, category: "Frontend", level: 90 },
-    { name: "SASS", icon: faSass, category: "Frontend", level: 80 },
-    { name: "Bootstrap", icon: faBootstrap, category: "Frontend", level: 85 },
-    { name: "Node.js", icon: faNodeJs, category: "Backend", level: 75 },
-    { name: "Python", icon: faPython, category: "Backend", level: 70 },
-    { name: "MongoDB", icon: faDatabase, category: "Backend", level: 65 },
-    { name: "Express", icon: faServer, category: "Backend", level: 70 },
-    { name: "Git", icon: faGitAlt, category: "Tools", level: 85 },
-    { name: "VS Code", icon: faCode, category: "Tools", level: 90 },
-    { name: "Webpack", icon: faCog, category: "Tools", level: 60 },
-  ];
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
 
-  const categories = [
-    { display: skillsTranslations[language].all, value: "All" },
-    { display: skillsTranslations[language].frontend, value: "Frontend" },
-    { display: skillsTranslations[language].backend, value: "Backend" },
-    { display: skillsTranslations[language].tools, value: "Tools" },
-  ];
-
-  const filteredSkills = skillsData.filter(
-    (skill) => activeFilter === "All" || skill.category === activeFilter
-  );
-
-  const handleFilterChange = (category) => {
-    setActiveFilter(category);
-  };
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if (skillsRef.current && skillsRef.current.children.length > 0) {
-        const skillBoxes = skillsRef.current.children;
-
-        gsap.set(skillBoxes, { opacity: 0, y: 20, scale: 0.9 });
-
-        gsap.to(skillBoxes, {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          duration: 0.4,
-          stagger: 0.05,
-          ease: "power2.out",
-        });
-
-        ScrollTrigger.refresh();
-      }
-    }, 10);
-
-    return () => clearTimeout(timer);
-  }, [activeFilter]);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
+    const ctx = gsap.context(() => {
       if (titleRef.current) {
         gsap.fromTo(
           titleRef.current,
-          { opacity: 0, y: 50 },
+          { opacity: 0, y: 44, filter: "blur(8px)" },
           {
             opacity: 1,
             y: 0,
-            duration: 0.6,
-            ease: "power2.out",
+            filter: "blur(0px)",
+            duration: reduceMotion ? 0.2 : 0.85,
+            ease: "power3.out",
             scrollTrigger: {
               trigger: titleRef.current,
+              start: "top 88%",
+              toggleActions: "play none none reverse",
+              fastScrollEnd: true,
+            },
+          },
+        );
+      }
+
+      if (subtitleRef.current) {
+        gsap.fromTo(
+          subtitleRef.current,
+          { opacity: 0, y: 20 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: reduceMotion ? 0.15 : 0.55,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: subtitleRef.current,
               start: "top 90%",
               toggleActions: "play none none reverse",
               fastScrollEnd: true,
             },
-          }
+          },
         );
       }
 
-      if (navRef.current) {
+      if (hintRef.current) {
         gsap.fromTo(
-          navRef.current,
-          { opacity: 0, y: 30 },
+          hintRef.current,
+          { opacity: 0 },
           {
             opacity: 1,
-            y: 0,
-            duration: 0.5,
-            ease: "power2.out",
+            duration: reduceMotion ? 0.15 : 0.45,
+            delay: reduceMotion ? 0 : 0.12,
             scrollTrigger: {
-              trigger: navRef.current,
-              start: "top 85%",
+              trigger: hintRef.current,
+              start: "top 92%",
               toggleActions: "play none none reverse",
               fastScrollEnd: true,
             },
-          }
+          },
         );
       }
 
-      if (skillsRef.current && skillsRef.current.children.length > 0) {
-        gsap.fromTo(
-          skillsRef.current.children,
-          { opacity: 0, y: 50, scale: 0.8 },
+      const panels = gsap.utils.toArray(root.querySelectorAll(".skills-panel"));
+      panels.forEach((panel, panelIndex) => {
+        const head = panel.querySelector(".skills-panel__head");
+        const chips = panel.querySelectorAll(".skills-chip");
+
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: panel,
+            start: "top 86%",
+            toggleActions: "play none none reverse",
+            fastScrollEnd: true,
+          },
+        });
+
+        if (reduceMotion) {
+          tl.set(panel, { opacity: 1 }).set([head, ...chips], { opacity: 1 });
+          return;
+        }
+
+        tl.fromTo(
+          panel,
+          {
+            opacity: 0,
+            y: 52,
+            rotateX: 6,
+            transformPerspective: 1100,
+          },
           {
             opacity: 1,
             y: 0,
-            scale: 1,
-            duration: 0.5,
-            stagger: 0.08,
-            ease: "power2.out",
-            scrollTrigger: {
-              trigger: skillsRef.current,
-              start: "top 80%",
-              toggleActions: "play none none reverse",
-              fastScrollEnd: true,
+            rotateX: 0,
+            duration: 0.72,
+            ease: "power3.out",
+            delay: panelIndex * 0.04,
+          },
+        )
+          .fromTo(
+            head,
+            { opacity: 0, x: -28 },
+            { opacity: 1, x: 0, duration: 0.5, ease: "power2.out" },
+            "-=0.45",
+          )
+          .fromTo(
+            chips,
+            {
+              opacity: 0,
+              y: 22,
+              scale: 0.9,
+              rotation: () => gsap.utils.random(-4, 4),
             },
-          }
-        );
-      }
-
-      ScrollTrigger.refresh();
-    }, 50);
+            {
+              opacity: 1,
+              y: 0,
+              scale: 1,
+              rotation: 0,
+              duration: 0.48,
+              stagger: 0.04,
+              ease: "back.out(1.35)",
+            },
+            "-=0.35",
+          );
+      });
+    }, root);
 
     return () => {
-      clearTimeout(timer);
-      ScrollTrigger.getAll().forEach((trigger) => {
-        if (
-          trigger.trigger === titleRef.current ||
-          trigger.trigger === navRef.current ||
-          trigger.trigger === skillsRef.current
-        ) {
-          trigger.kill();
-        }
-      });
+      ctx.revert();
     };
-  }, []);
+  }, [language]);
+
+  const t = skillsTranslations[language];
 
   return (
-    <div className="skills-container">
-      <h1 className="skills-title" ref={titleRef}>
-        {skillsTranslations[language].title}{" "}
-        <span style={{ color: "#9d03fc" }}>
-          {skillsTranslations[language].skills}
-        </span>
-      </h1>
+    <div className="skills-container" ref={rootRef}>
+      <header className="skills-header">
+        <h1 className="skills-title" ref={titleRef}>
+          {t.title} <span className="skills-title-accent">{t.skills}</span>
+        </h1>
+        <p className="skills-subtitle" ref={subtitleRef}>
+          {t.subtitle}
+        </p>
+        <p className="skills-hint" ref={hintRef}>
+          {t.stackHint}
+        </p>
+      </header>
 
-      <div className="skillsNav" ref={navRef}>
-        <ul className="skillsUl">
-          {categories.map((category) => (
-            <li
-              key={category.value}
-              className={activeFilter === category.value ? "active" : ""}
-              onClick={() => handleFilterChange(category.value)}
+      <div className="skills-bento">
+        {CATEGORY_ORDER.map((category) => {
+          const items = skillsData.filter((s) => s.category === category);
+          return (
+            <article
+              key={category}
+              className="skills-panel"
+              data-category={category}
             >
-              {category.display}
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      <div className="skillsMain" ref={skillsRef}>
-        {filteredSkills.map((skill, index) => (
-          <div
-            key={skill.name}
-            className="skillBox"
-            style={{ animationDelay: `${index * 0.1}s` }}
-          >
-            <div className="skillContent">
-              <FontAwesomeIcon className="skillIcon" icon={skill.icon} />
-              <h3 className="skillName">{skill.name}</h3>
-              <div className="skillLevel">
-                <div
-                  className="skillProgress"
-                  style={{ width: `${skill.level}%` }}
-                ></div>
-              </div>
-              <span className="skillPercentage">{skill.level}%</span>
-            </div>
-          </div>
-        ))}
+              <div className="skills-panel__sheen" aria-hidden />
+              <header className="skills-panel__head">
+                <h2 className="skills-panel__title">
+                  {t.categoryLabels[category]}
+                </h2>
+                <span className="skills-panel__badge">
+                  {items.length} {t.countUnit}
+                </span>
+              </header>
+              <ul className="skills-chip-cloud" role="list">
+                {items.map((skill) => (
+                  <li
+                    key={skill.name}
+                    className="skills-chip"
+                    style={{ "--level": skill.level }}
+                    title={`${skill.name} — ${skill.level}%`}
+                  >
+                    <span className="skills-chip__accent" aria-hidden />
+                    <FontAwesomeIcon
+                      className="skills-chip__icon"
+                      icon={skill.icon}
+                    />
+                    <span className="skills-chip__name">{skill.name}</span>
+                    <span className="skills-chip__gauge" aria-hidden>
+                      <span
+                        className="skills-chip__gauge-fill"
+                        style={{ width: `${skill.level}%` }}
+                      />
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </article>
+          );
+        })}
       </div>
     </div>
   );

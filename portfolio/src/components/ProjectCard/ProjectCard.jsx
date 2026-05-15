@@ -73,7 +73,13 @@ export function ProjectCard({ project, language = "en" }) {
 
         <div className="project-content">
           <h3 className="project-title">{titleText}</h3>
-          <p className="project-description">{project.description}</p>
+          <p
+            className="project-description"
+            data-lenis-prevent
+            tabIndex={0}
+          >
+            {project.description}
+          </p>
 
           {project.technologies && (
             <div className="project-technologies">

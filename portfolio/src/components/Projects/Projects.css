@@ -10,12 +10,12 @@
   flex-direction: column;
   width: 100%;
   min-height: 100vh;
-  padding: 3rem 0 2rem 0;
+  padding: 0.75rem 0 2rem 0;
 }
 
 .projectsTitle {
-  margin-top: 2rem;
-  margin-bottom: 3rem;
+  margin-top: 0.5rem;
+  margin-bottom: 2.25rem;
   text-align: center;
   font-size: 3rem;
   font-weight: 700;
@@ -55,7 +55,7 @@
 
 @media (max-width: 1200px) {
   .ProjectsContainer {
-    padding: 2rem 0 1rem 0;
+    padding: 0.5rem 0 1rem 0;
   }
   .carouselContainer {
     width: 85%;
@@ -67,7 +67,7 @@
 
 @media (max-width: 992px) {
   .ProjectsContainer {
-    padding: 2rem 0 1rem 0;
+    padding: 0.5rem 0 1rem 0;
   }
   .carouselContainer {
     width: 90%;
@@ -83,15 +83,15 @@
 
 @media (max-width: 768px) {
   .ProjectsContainer {
-    padding: 1.5rem 1rem 1rem 1rem;
+    padding: 0.35rem 1rem 1rem 1rem;
   }
   .carouselContainer {
     width: 95%;
   }
   .projectsTitle {
     font-size: 1.75rem;
-    margin-top: 1.5rem;
-    margin-bottom: 2rem;
+    margin-top: 0.35rem;
+    margin-bottom: 1.75rem;
   }
 
   .carouselFallback {
@@ -105,14 +105,14 @@
 
 @media (max-width: 480px) {
   .ProjectsContainer {
-    padding: 1rem 0.5rem 0.5rem 0.5rem;
+    padding: 0.25rem 0.5rem 0.5rem 0.5rem;
   }
   .carouselContainer {
     width: 100%;
   }
   .projectsTitle {
     font-size: 1.5rem;
-    margin-top: 1rem;
-    margin-bottom: 1.5rem;
+    margin-top: 0.25rem;
+    margin-bottom: 1.35rem;
   }
 }

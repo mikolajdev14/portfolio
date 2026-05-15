@@ -28,6 +28,9 @@ export function Projects({ language = "en" }) {
   const [shouldLoadCarousel, setShouldLoadCarousel] = useState(false);
 
   useEffect(() => {
+    const titleEl = titleRef.current;
+    const carouselEl = carouselRef.current;
+
     const timer = setTimeout(() => {
       if (titleRef.current) {
         gsap.fromTo(
@@ -74,8 +77,8 @@ export function Projects({ language = "en" }) {
       clearTimeout(timer);
       ScrollTrigger.getAll().forEach((trigger) => {
         if (
-          trigger.trigger === titleRef.current ||
-          trigger.trigger === carouselRef.current
+          trigger.trigger === titleEl ||
+          trigger.trigger === carouselEl
         ) {
           trigger.kill();
         }

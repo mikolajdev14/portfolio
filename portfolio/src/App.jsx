@@ -1,4 +1,5 @@
 import { MainPage } from "./components/MainPage/MainPage";
+import { CustomCursor } from "./components/CustomCursor/CustomCursor";
 import "./App.css";
 
 export default function App() {
@@ -11,6 +12,7 @@ export default function App() {
         padding: 0,
       }}
     >
+      <CustomCursor />
       <MainPage />
     </div>
   );

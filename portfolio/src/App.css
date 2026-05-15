@@ -1,5 +1,17 @@
 @import url("https://fonts.googleapis.com/css2?family=Cascadia+Code:ital,wght@0,200..700;1,200..700&family=Poetsen+One&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
+:root {
+  --accent: #9d03fc;
+  --accent-mid: #7c3aed;
+  --accent-soft: #c084fc;
+  --bg-deep: #0c0b0d;
+  --bg-base: #141313;
+  --bg-elevated: #1a191b;
+  --glass-border: rgba(255, 255, 255, 0.16);
+  --glass-highlight: rgba(255, 255, 255, 0.06);
+  --text-muted: rgba(255, 255, 255, 0.72);
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -21,12 +33,20 @@
 
 html {
   height: 100%;
+  background-color: var(--bg-deep);
+}
+
+::selection {
+  background: rgba(157, 3, 252, 0.35);
+  color: #fff;
 }
 
 body {
   margin: 0;
   padding: 0;
-  background: #141313;
+  padding-left: env(safe-area-inset-left, 0px);
+  padding-right: env(safe-area-inset-right, 0px);
+  background: var(--bg-deep);
   font-family:
     -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
     "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
@@ -39,35 +59,50 @@ body {
 
 #root {
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
+  min-height: 100dvh;
   margin: 0;
   padding: 0;
+  background: var(--bg-deep);
 }
 
 .light-rays-container {
   position: absolute !important;
-  top: 0 !important;
-  left: 0 !important;
+  inset: 0 !important;
   width: 100% !important;
   height: 100% !important;
+  min-height: 100% !important;
   z-index: 0 !important;
 }
 
 .NavBar {
+  box-sizing: border-box;
   width: min(92%, 1080px);
+  max-width: calc(
+    100vw - env(safe-area-inset-left, 0px) - env(safe-area-inset-right, 0px) - 1rem
+  );
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: clamp(0.5rem, 0.8vw, 1rem);
   padding: 0.9rem clamp(1rem, 2vw, 2rem);
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border: 1px solid white;
-  border-radius: 15px;
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.12) 0%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
   margin: 2rem auto;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.35),
+    0 0 0 1px var(--glass-highlight) inset,
+    0 1px 0 rgba(255, 255, 255, 0.1) inset,
+    0 -24px 48px rgba(157, 3, 252, 0.06);
   position: fixed;
-  top: 10px;
+  top: max(10px, env(safe-area-inset-top, 0px));
   left: 50%;
   transform: translateX(-50%);
   z-index: 2;
@@ -79,6 +114,7 @@ body {
   color: white;
   font-family: "Poetsen One", cursive;
   flex-shrink: 0;
+  letter-spacing: 0.02em;
 }
 
 .Links {
@@ -90,34 +126,43 @@ body {
 }
 
 .Links a {
-  color: white;
+  color: rgba(255, 255, 255, 0.92);
   text-decoration: none;
   font-weight: 500;
   font-size: clamp(0.72rem, 0.58rem + 0.42vw, 0.98rem);
-  transition: all 0.3s ease;
+  letter-spacing: 0.04em;
+  transition:
+    color 0.25s ease,
+    background 0.25s ease,
+    transform 0.25s ease;
   padding: clamp(0.35rem, 0.4vw, 0.5rem) clamp(0.5rem, 0.9vw, 0.9rem);
   border-radius: 8px;
   white-space: nowrap;
 }
 
 .Links a:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.14);
+  color: #fff;
   transform: translateY(-2px);
 }
 
 .language-btn {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(10px);
-  border: 1px solid white;
+  border: 1px solid var(--glass-border);
   padding: 0.45rem clamp(0.7rem, 1vw, 1rem);
   color: white;
   font-size: 0.9rem;
   font-weight: 500;
+  letter-spacing: 0.06em;
   cursor: pointer;
-  transition: all 0.3s ease;
-  border-radius: 8px;
-  margin-left: 1rem;
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s ease;
+  border-radius: 10px;
   flex-shrink: 0;
+  margin-left: 1rem;
 }
 
 .NavBar.compact {
@@ -164,7 +209,8 @@ body {
 }
 
 .language-btn:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(157, 3, 252, 0.22);
+  border-color: rgba(157, 3, 252, 0.45);
   transform: translateY(-2px);
 }
 
@@ -173,56 +219,83 @@ body {
   font-size: 4rem;
   filter: drop-shadow(0 0 10px #9d03fc);
   text-align: center;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .welcomeContainer {
   margin: 2rem auto;
   display: flex;
-  width: 40%;
+  width: min(100%, 40rem);
   flex-direction: column;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
+  padding: 0 clamp(0.75rem, 4vw, 1.5rem);
+  box-sizing: border-box;
 }
 
 .smTextType {
   font-size: 1.5rem;
   text-align: center;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .VMWbutton {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-  border: 1px solid white;
-  padding: 10px 20px;
+  background: linear-gradient(
+    160deg,
+    rgba(255, 255, 255, 0.14) 0%,
+    rgba(255, 255, 255, 0.06) 100%
+  );
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.35),
+    0 0 0 1px var(--glass-highlight) inset;
+  border: 1px solid var(--glass-border);
+  padding: 12px 26px;
   color: white;
-  font-size: 1.1rem;
+  font-size: 1.05rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
   margin-top: 30px;
   cursor: pointer;
-  transition: 0.2s;
+  transition:
+    background 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    transform 0.25s ease;
   text-decoration: none;
+  border-radius: 999px;
 }
 
 .VMWbutton:hover {
-  background: #9d03fc;
-  box-shadow: 0 0px 32px #9d03fc;
-  transition: 0.2s;
+  background: linear-gradient(135deg, var(--accent), var(--accent-mid));
+  border-color: rgba(157, 3, 252, 0.65);
+  box-shadow:
+    0 0 40px rgba(157, 3, 252, 0.45),
+    0 8px 32px rgba(0, 0, 0, 0.35);
+  transform: translateY(-2px);
 }
 
 .MainPageContainer {
   width: 100%;
   position: relative;
-  background: #141313;
+  background: var(--bg-deep);
   min-height: 100vh;
 }
 
+/* Cover the full visual viewport (avoids 100vh gaps when mobile URL bar resizes) */
 .LightRaysContainer {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
+  inset: 0;
+  width: auto;
+  height: auto;
+  min-width: 100%;
+  min-height: 100%;
   z-index: 0;
   pointer-events: none;
 }
@@ -240,16 +313,50 @@ body {
 }
 
 .AboutSection,
-.skillSection,
 .projectSection,
 .ContactSection {
   z-index: 1;
   width: 100%;
   position: relative;
   border: none;
-  min-height: 100vh; /* Ensure each section takes full viewport height */
-  /* Remove flex properties that interfere with ScrollStack */
-  /* Remove padding to allow full width */
+  min-height: 100vh;
+}
+
+/* Skills + Projects: natural height so there is no empty band between them */
+.skillSection {
+  z-index: 1;
+  width: 100%;
+  position: relative;
+  border: none;
+  min-height: 0;
+}
+
+.AboutSection::before,
+.skillSection::before,
+.projectSection::before,
+.ContactSection::before {
+  content: "";
+  display: block;
+  width: min(88%, 720px);
+  height: 1px;
+  margin: 0 auto;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.14),
+    rgba(157, 3, 252, 0.35),
+    rgba(255, 255, 255, 0.14),
+    transparent
+  );
+  opacity: 0.85;
+}
+
+.skillSection::before {
+  margin-bottom: 0.35rem;
+}
+
+.projectSection::before {
+  margin-bottom: 0.5rem;
 }
 
 .scrollBox {
@@ -279,9 +386,6 @@ body {
     width: min(93%, 980px);
     padding: 0.8rem 1.5rem;
   }
-  .welcomeContainer {
-    width: 55%;
-  }
   .TextType {
     font-size: 3.5rem;
   }
@@ -298,9 +402,6 @@ body {
   .Links a {
     padding: 0.32rem 0.55rem;
     font-size: clamp(0.7rem, 0.6rem + 0.35vw, 0.85rem);
-  }
-  .welcomeContainer {
-    width: 65%;
   }
   .TextType {
     font-size: 3rem;
@@ -330,7 +431,6 @@ body {
     font-size: 1.25rem;
   }
   .welcomeContainer {
-    width: 85%;
     margin: 1.5rem auto;
   }
   .TextType {
@@ -413,7 +513,6 @@ body {
     padding: 0.4rem 0.6rem;
   }
   .welcomeContainer {
-    width: 92%;
     margin: 1rem auto;
   }
   .TextType {

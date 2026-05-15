@@ -50,6 +50,10 @@ export function About({ language = "en" }) {
   const boxesRef = useRef(null);
 
   useEffect(() => {
+    const titleEl = titleRef.current;
+    const msgEl = msgRef.current;
+    const boxesEl = boxesRef.current;
+
     const timer = setTimeout(() => {
       if (titleRef.current) {
         gsap.fromTo(
@@ -116,9 +120,9 @@ export function About({ language = "en" }) {
       clearTimeout(timer);
       ScrollTrigger.getAll().forEach((trigger) => {
         if (
-          trigger.trigger === titleRef.current ||
-          trigger.trigger === msgRef.current ||
-          trigger.trigger === boxesRef.current
+          trigger.trigger === titleEl ||
+          trigger.trigger === msgEl ||
+          trigger.trigger === boxesEl
         ) {
           trigger.kill();
         }

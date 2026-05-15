@@ -97,6 +97,11 @@ export function MainPage() {
   const contactRef = useRef(null);
 
   useEffect(() => {
+    const aboutEl = aboutRef.current;
+    const skillsEl = skillsRef.current;
+    const projectsEl = projectsRef.current;
+    const contactEl = contactRef.current;
+
     const timer = setTimeout(() => {
       if (welcomeRef.current) {
         gsap.fromTo(
@@ -230,11 +235,10 @@ export function MainPage() {
       clearTimeout(timer);
       ScrollTrigger.getAll().forEach((trigger) => {
         if (
-          trigger.trigger === welcomeRef.current ||
-          trigger.trigger === aboutRef.current ||
-          trigger.trigger === skillsRef.current ||
-          trigger.trigger === projectsRef.current ||
-          trigger.trigger === contactRef.current
+          trigger.trigger === aboutEl ||
+          trigger.trigger === skillsEl ||
+          trigger.trigger === projectsEl ||
+          trigger.trigger === contactEl
         ) {
           trigger.kill();
         }

@@ -101,6 +101,11 @@ export function Contact({ language = "en" }) {
   };
 
   useEffect(() => {
+    const titleEl = titleRef.current;
+    const descEl = descRef.current;
+    const infoEl = infoRef.current;
+    const formEl = formRef.current;
+
     const timer = setTimeout(() => {
       if (titleRef.current) {
         gsap.fromTo(
@@ -185,10 +190,10 @@ export function Contact({ language = "en" }) {
       clearTimeout(timer);
       ScrollTrigger.getAll().forEach((trigger) => {
         if (
-          trigger.trigger === titleRef.current ||
-          trigger.trigger === descRef.current ||
-          trigger.trigger === infoRef.current ||
-          trigger.trigger === formRef.current
+          trigger.trigger === titleEl ||
+          trigger.trigger === descEl ||
+          trigger.trigger === infoEl ||
+          trigger.trigger === formEl
         ) {
           trigger.kill();
         }

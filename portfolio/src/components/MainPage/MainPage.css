@@ -6,11 +6,8 @@ html {
   padding-top: 0;
 }
 
+/* Z-index only: position (centered bar) lives in App.css — avoid left:0 + translateX(-50%) overflow on phones */
 .NavBar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
   z-index: 9999;
 }
 
@@ -18,5 +15,5 @@ html {
 .skillSection,
 .projectSection,
 .ContactSection {
-  scroll-margin-top: 100px; /* Increased for better spacing with fixed navbar */
+  scroll-margin-top: calc(100px + env(safe-area-inset-top, 0px));
 }

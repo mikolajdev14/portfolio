@@ -69,12 +69,15 @@ const LightRays = ({
       cleanupFunctionRef.current = null;
     }
 
+    let cancelled = false;
+    let resizeObserver = null;
+
     const initializeWebGL = async () => {
       if (!containerRef.current) return;
 
       await new Promise((resolve) => setTimeout(resolve, 10));
 
-      if (!containerRef.current) return;
+      if (cancelled || !containerRef.current) return;
 
       const renderer = new Renderer({
         dpr: Math.min(window.devicePixelRatio, 2),
@@ -85,6 +88,7 @@ const LightRays = ({
       const gl = renderer.gl;
       gl.canvas.style.width = "100%";
       gl.canvas.style.height = "100%";
+      gl.canvas.style.display = "block";
 
       while (containerRef.current.firstChild) {
         containerRef.current.removeChild(containerRef.current.firstChild);
@@ -224,11 +228,13 @@ void main() {
       meshRef.current = mesh;
 
       const updatePlacement = () => {
-        if (!containerRef.current || !renderer) return;
+        if (cancelled || !containerRef.current || !renderer) return;
 
         renderer.dpr = Math.min(window.devicePixelRatio, 2);
 
         const { clientWidth: wCSS, clientHeight: hCSS } = containerRef.current;
+        if (wCSS < 1 || hCSS < 1) return;
+
         renderer.setSize(wCSS, hCSS);
 
         const dpr = renderer.dpr;
@@ -243,7 +249,12 @@ void main() {
       };
 
       const loop = (t) => {
-        if (!rendererRef.current || !uniformsRef.current || !meshRef.current) {
+        if (
+          cancelled ||
+          !rendererRef.current ||
+          !uniformsRef.current ||
+          !meshRef.current
+        ) {
           return;
         }
 
@@ -270,12 +281,29 @@ void main() {
           animationIdRef.current = requestAnimationFrame(loop);
         } catch (error) {
           console.warn("WebGL rendering error:", error);
-          return;
+        }
+      };
+
+      const onVisibility = () => {
+        if (!document.hidden) {
+          updatePlacement();
         }
       };
 
       window.addEventListener("resize", updatePlacement);
+      document.addEventListener("visibilitychange", onVisibility);
+
+      if (typeof ResizeObserver !== "undefined") {
+        resizeObserver = new ResizeObserver(() => updatePlacement());
+        resizeObserver.observe(containerRef.current);
+      }
+
       updatePlacement();
+      requestAnimationFrame(() => {
+        updatePlacement();
+        requestAnimationFrame(updatePlacement);
+      });
+
       animationIdRef.current = requestAnimationFrame(loop);
 
       cleanupFunctionRef.current = () => {
@@ -285,6 +313,9 @@ void main() {
         }
 
         window.removeEventListener("resize", updatePlacement);
+        document.removeEventListener("visibilitychange", onVisibility);
+        resizeObserver?.disconnect();
+        resizeObserver = null;
 
         if (renderer) {
           try {
@@ -312,6 +343,7 @@ void main() {
     initializeWebGL();
 
     return () => {
+      cancelled = true;
       if (cleanupFunctionRef.current) {
         cleanupFunctionRef.current();
         cleanupFunctionRef.current = null;

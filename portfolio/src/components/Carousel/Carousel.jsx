@@ -1,10 +1,10 @@
 import "./Carousel.css";
 import { useState, useEffect } from "react";
-import codeImage from "../../assets/code.png";
 import portfolioImage from "../../assets/image.png";
 import progressImg from "../../assets/progress.png";
 import cafeImg from "../../assets/cafe.png";
-import personalTrainer from "../../assets/personal-trainer-site.png";
+import personalTrainer from "../../assets/trenerPersonalny.png";
+import productPage from "../../assets/ProductPage.png";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -22,15 +22,7 @@ const projectTranslations = {
       github: "https://github.com/mikolajdev14/portfolio",
       live: "https://mikolajdev.netlify.app",
     },
-    {
-      ref: "ecommerce",
-      img: progressImg,
-      title: "E-commerce Platform",
-      description:
-        "Full-stack e-commerce solution with user authentication, product management, shopping cart functionality, and payment integration. Features responsive design and modern UI/UX.",
-      technologies: ["React", "Node.js", "MongoDB", "Express", "Stripe API"],
-      github: "https://github.com/mikolajdev14/ecommerce-platform",
-    },
+
     {
       ref: "Cafe Landing Page",
       img: cafeImg,
@@ -40,21 +32,7 @@ const projectTranslations = {
       technologies: ["React", "TypeScript", "Shadcn", "Tailwind"],
       github: "https://github.com/mikolajdev14/Coffe-Shop-Landing-Page",
     },
-    {
-      ref: "taskmanager",
-      img: progressImg,
-      title: "Task Management App",
-      description:
-        "A comprehensive task management application with drag-and-drop functionality, real-time collaboration, deadline tracking, and progress visualization. Built with modern web technologies.",
-      technologies: [
-        "React",
-        "TypeScript",
-        "Firebase",
-        "Material-UI",
-        "React DnD",
-      ],
-      github: "https://github.com/mikolajdev14/task-manager",
-    },
+
     {
       ref: "Personal Trainer Website",
       img: personalTrainer,
@@ -63,6 +41,15 @@ const projectTranslations = {
         "A modern website for a personal trainer, built with Next.js, TypeScript, and Tailwind CSS. Features responsive design, animations, and an elegant UI.",
       technologies: ["Next.js", "TypeScript", "Tailwind CSS"],
       github: "https://github.com/mikolajdev14/personal-trainer-example-page",
+    },
+    {
+      ref: "Sample Product Landing Page",
+      img: productPage,
+      title: "Sample Product Landing Page",
+      description:
+        "FlowSync AI is a dark, glass-style one-page SaaS landing (fictional product) built as a portfolio piece. It uses Next.js 14, React, TypeScript, Tailwind, and Framer Motion for layout, motion, and responsive UX.",
+      technologies: ["Next.js", "TypeScript", "Framer Motion"],
+      github: "https://github.com/mikolajdev14/Sample-Product-Landing-Page",
     },
   ],
   pl: [
@@ -76,15 +63,7 @@ const projectTranslations = {
       github: "https://github.com/mikolajdev14/portfolio",
       live: "https://mikolajdev.netlify.app/",
     },
-    {
-      ref: "ecommerce",
-      img: progressImg,
-      title: "Platforma e-commerce",
-      description:
-        "Pełnostackowe rozwiązanie e-commerce z uwierzytelnianiem użytkowników, zarządzaniem produktami, funkcjonalnością koszyka zakupów i integracją płatności. Funkcje responsywny design i nowoczesny UI/UX.",
-      technologies: ["React", "Node.js", "MongoDB", "Express", "Stripe API"],
-      github: "https://github.com/mikolajdev14/ecommerce-platform",
-    },
+
     {
       ref: "Cafe Landing Page",
       img: cafeImg,
@@ -94,21 +73,7 @@ const projectTranslations = {
       technologies: ["React", "TypeScript", "Shadcn", "Tailwind"],
       github: "https://github.com/mikolajdev14/Coffe-Shop-Landing-Page",
     },
-    {
-      ref: "taskmanager",
-      img: progressImg,
-      title: "Aplikacja do zarządzania zadaniami",
-      description:
-        "Kompleksowa aplikacja do zarządzania zadaniami z funkcją przeciągania i upuszczania, współpracą w czasie rzeczywistym, śledzeniem terminów i wizualizacją postępów. Zbudowana z nowoczesnymi technologiami webowymi.",
-      technologies: [
-        "React",
-        "TypeScript",
-        "Firebase",
-        "Material-UI",
-        "React DnD",
-      ],
-      github: "https://github.com/mikolajdev14/task-manager",
-    },
+
     {
       ref: "Personal Trainer Website",
       img: personalTrainer,
@@ -118,13 +83,22 @@ const projectTranslations = {
       technologies: ["Next.js", "TypeScript", "Tailwind CSS"],
       github: "https://github.com/mikolajdev14/personal-trainer-example-page",
     },
+    {
+      ref: "Sample Product Landing Page",
+      img: productPage,
+      title: "Strona główna przykładowego produktu",
+      description:
+        "FlowSync AI to jednostronicowy landing SaaS w ciemnym, szklanym stylu (fikcyjny produkt), zrobiony pod portfolio. Używa Next.js 14, React, TypeScript, Tailwind i Framer Motion do układu, animacji i responsywnego UX.",
+      technologies: ["Next.js", "TypeScript", "Framer Motion"],
+      github: "https://github.com/mikolajdev14/Sample-Product-Landing-Page",
+    },
   ],
 };
 
-const initProjects = projectTranslations.en;
-
 export function Carousel({ language = "en" }) {
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const [isMobile, setIsMobile] = useState(() =>
+    typeof window !== "undefined" ? window.innerWidth < 768 : false,
+  );
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 768);
