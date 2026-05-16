@@ -68,6 +68,7 @@ export function ProjectCard({ project, language = "en" }) {
             alt={project.title || project.description}
             loading="lazy"
             decoding="async"
+            sizes="(max-width: 768px) 100vw, 340px"
           />
         </button>
 
@@ -92,6 +93,22 @@ export function ProjectCard({ project, language = "en" }) {
           )}
 
           <div className="project-links">
+            <a
+              href={project.live || "#"}
+              target={project.live ? "_blank" : undefined}
+              rel={project.live ? "noopener noreferrer" : undefined}
+              className={`project-link live-link ${
+                project.live ? "" : "project-link--placeholder"
+              }`.trim()}
+              aria-disabled={!project.live}
+              onClick={(event) => {
+                if (!project.live) {
+                  event.preventDefault();
+                }
+              }}
+            >
+              {projectCardTranslations[language].liveDemo}
+            </a>
             <a
               href={project.github}
               target="_blank"
@@ -132,6 +149,7 @@ export function ProjectCard({ project, language = "en" }) {
               <img
                 src={project.img}
                 alt={project.title || project.description}
+                decoding="async"
               />
             </div>
           </div>,

@@ -2,17 +2,22 @@
 
 :root {
   --accent: #9d03fc;
-  --accent-mid: #7c3aed;
-  --accent-soft: #c084fc;
-  --bg-deep: #0c0b0d;
-  --bg-base: #141313;
-  --bg-elevated: #1a191b;
-  --glass-border: rgba(255, 255, 255, 0.16);
-  --glass-highlight: rgba(255, 255, 255, 0.06);
-  --text-muted: rgba(255, 255, 255, 0.72);
-  /* Readable line length & gutters on small screens */
-  --phone-gutter: clamp(0.75rem, 4.2vw, 1.125rem);
-  --phone-text-max: 36rem;
+  --accent-mid: #6d5dfc;
+  --accent-soft: #b98cff;
+  --accent-alt: #22d3ee;
+  --bg-deep: #07080c;
+  --bg-base: #0e1017;
+  --bg-elevated: #151823;
+  --surface: rgba(18, 21, 31, 0.78);
+  --surface-strong: rgba(22, 25, 37, 0.92);
+  --glass-border: rgba(255, 255, 255, 0.14);
+  --glass-highlight: rgba(255, 255, 255, 0.07);
+  --text-main: rgba(255, 255, 255, 0.96);
+  --text-muted: rgba(235, 241, 255, 0.7);
+  --section-x: clamp(1rem, 4.5vw, 4rem);
+  --section-y: clamp(4rem, 8vw, 7rem);
+  --phone-gutter: clamp(0.9rem, 4.4vw, 1.25rem);
+  --phone-text-max: 37rem;
 }
 
 * {
@@ -35,10 +40,15 @@
 }
 
 html {
-  height: 100%;
-  background-color: var(--bg-deep);
+  height: auto;
+  min-height: 100%;
+  background:
+    linear-gradient(180deg, #07080c 0%, #101119 44%, #08090f 100%);
+  color: var(--text-main);
   max-width: 100%;
-  overflow-x: clip;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scroll-behavior: smooth;
 }
 
 ::selection {
@@ -51,14 +61,15 @@ body {
   padding: 0;
   padding-left: env(safe-area-inset-left, 0px);
   padding-right: env(safe-area-inset-right, 0px);
-  background: var(--bg-deep);
+  background:
+    linear-gradient(135deg, rgba(34, 211, 238, 0.06), transparent 28%),
+    linear-gradient(180deg, var(--bg-deep) 0%, var(--bg-base) 45%, #08090f 100%);
   font-family:
     -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
     "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: clip;
-  overflow-y: auto;
+  overflow: visible;
   min-height: 100vh;
   max-width: 100%;
 }
@@ -71,7 +82,24 @@ body {
   margin: 0;
   padding: 0;
   background: var(--bg-deep);
-  overflow-x: clip;
+  overflow: visible;
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+html.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+html.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+html.lenis.lenis-stopped {
+  overflow: hidden;
 }
 
 .light-rays-container {
@@ -93,22 +121,21 @@ body {
   justify-content: space-between;
   align-items: center;
   gap: clamp(0.5rem, 0.8vw, 1rem);
-  padding: 0.9rem clamp(1rem, 2vw, 2rem);
+  padding: 0.78rem clamp(0.9rem, 1.8vw, 1.6rem);
   background: linear-gradient(
     145deg,
-    rgba(255, 255, 255, 0.12) 0%,
-    rgba(255, 255, 255, 0.05) 100%
+    rgba(22, 25, 37, 0.86) 0%,
+    rgba(12, 14, 22, 0.68) 100%
   );
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(20px) saturate(130%);
+  -webkit-backdrop-filter: blur(20px) saturate(130%);
   border: 1px solid var(--glass-border);
-  border-radius: 16px;
-  margin: 2rem auto;
+  border-radius: 12px;
+  margin: 1.35rem auto;
   box-shadow:
-    0 4px 24px rgba(0, 0, 0, 0.35),
+    0 16px 42px rgba(0, 0, 0, 0.36),
     0 0 0 1px var(--glass-highlight) inset,
-    0 1px 0 rgba(255, 255, 255, 0.1) inset,
-    0 -24px 48px rgba(157, 3, 252, 0.06);
+    0 1px 0 rgba(255, 255, 255, 0.1) inset;
   position: fixed;
   top: max(10px, env(safe-area-inset-top, 0px));
   left: 50%;
@@ -130,7 +157,7 @@ body {
   color: white;
   font-family: "Poetsen One", cursive;
   flex-shrink: 0;
-  letter-spacing: 0.02em;
+  letter-spacing: 0;
 }
 
 .Links {
@@ -146,7 +173,7 @@ body {
   text-decoration: none;
   font-weight: 500;
   font-size: clamp(0.72rem, 0.58rem + 0.42vw, 0.98rem);
-  letter-spacing: 0.04em;
+  letter-spacing: 0;
   transition:
     color 0.25s ease,
     background 0.25s ease,
@@ -163,6 +190,7 @@ body {
 }
 
 .language-btn {
+  min-height: 40px;
   background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(10px);
   border: 1px solid var(--glass-border);
@@ -170,13 +198,13 @@ body {
   color: white;
   font-size: 0.9rem;
   font-weight: 500;
-  letter-spacing: 0.06em;
+  letter-spacing: 0;
   cursor: pointer;
   transition:
     background 0.25s ease,
     border-color 0.25s ease,
     transform 0.25s ease;
-  border-radius: 10px;
+  border-radius: 9px;
   flex-shrink: 0;
 }
 
@@ -200,9 +228,9 @@ body {
   right: 0;
   left: auto;
   transform: none;
-  background: rgba(20, 19, 19, 0.92);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.55);
+  background: var(--surface-strong);
+  backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 12px;
   padding: 0.65rem;
   flex-direction: column;
@@ -238,9 +266,10 @@ body {
 
 .TextType {
   font-family: "Poppins", sans-serif;
-  font-size: 4rem;
-  filter: drop-shadow(0 0 10px #9d03fc);
+  font-size: clamp(3rem, 7vw, 5.3rem);
+  filter: drop-shadow(0 18px 48px rgba(157, 3, 252, 0.22));
   text-align: center;
+  line-height: 1.02;
   max-width: 100%;
   overflow-wrap: anywhere;
   word-break: break-word;
@@ -249,7 +278,7 @@ body {
 .welcomeContainer {
   margin: 2rem auto;
   display: flex;
-  width: min(100%, 40rem);
+  width: min(100%, 55rem);
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -259,30 +288,33 @@ body {
 }
 
 .smTextType {
-  font-size: 1.5rem;
+  font-size: clamp(1rem, 1.7vw, 1.35rem);
   text-align: center;
+  color: var(--text-muted);
+  line-height: 1.7;
+  max-width: 54ch;
   max-width: 100%;
   overflow-wrap: anywhere;
   word-break: break-word;
 }
 
 .VMWbutton {
-  background: linear-gradient(
-    160deg,
-    rgba(255, 255, 255, 0.14) 0%,
-    rgba(255, 255, 255, 0.06) 100%
-  );
+  min-height: 46px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(157, 3, 252, 0.92), rgba(34, 211, 238, 0.72));
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   box-shadow:
     0 8px 32px rgba(0, 0, 0, 0.35),
     0 0 0 1px var(--glass-highlight) inset;
   border: 1px solid var(--glass-border);
-  padding: 12px 26px;
+  padding: 0.78rem 1.45rem;
   color: white;
   font-size: 1.05rem;
   font-weight: 500;
-  letter-spacing: 0.06em;
+  letter-spacing: 0;
   margin-top: 30px;
   cursor: pointer;
   transition:
@@ -291,11 +323,11 @@ body {
     box-shadow 0.3s ease,
     transform 0.25s ease;
   text-decoration: none;
-  border-radius: 999px;
+  border-radius: 10px;
 }
 
 .VMWbutton:hover {
-  background: linear-gradient(135deg, var(--accent), var(--accent-mid));
+  background: linear-gradient(135deg, var(--accent-mid), var(--accent-alt));
   border-color: rgba(157, 3, 252, 0.65);
   box-shadow:
     0 0 40px rgba(157, 3, 252, 0.45),
@@ -306,7 +338,9 @@ body {
 .MainPageContainer {
   width: 100%;
   position: relative;
-  background: var(--bg-deep);
+  background:
+    linear-gradient(180deg, transparent 0%, rgba(34, 211, 238, 0.035) 34%, transparent 58%),
+    var(--bg-deep);
   min-height: 100vh;
 }
 
@@ -326,6 +360,7 @@ body {
   z-index: 1;
   width: 100%;
   height: 100vh;
+  min-height: 680px;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -342,6 +377,8 @@ body {
   position: relative;
   border: none;
   min-height: 100vh;
+  padding-left: var(--section-x);
+  padding-right: var(--section-x);
 }
 
 /* Skills + Projects: natural height so there is no empty band between them */
@@ -351,6 +388,8 @@ body {
   position: relative;
   border: none;
   min-height: 0;
+  padding-left: var(--section-x);
+  padding-right: var(--section-x);
 }
 
 .AboutSection::before,
@@ -382,12 +421,14 @@ body {
 }
 
 .scrollBox {
-  color: white;
+  color: rgba(255, 255, 255, 0.72);
   display: flex;
   flex-direction: column;
   align-items: center;
   position: absolute;
   bottom: 20px;
+  font-size: 0.82rem;
+  gap: 0.35rem;
   animation: 2s linear infinite jump;
 }
 
@@ -439,8 +480,10 @@ body {
   border: 1px solid var(--glass-border);
   color: white;
   cursor: pointer;
+  min-width: 40px;
+  min-height: 40px;
   padding: 0.45rem;
-  border-radius: 10px;
+  border-radius: 9px;
   line-height: 0;
   transition:
     background 0.25s ease,
@@ -502,18 +545,18 @@ body {
   .NavBar {
     width: min(
       calc(
-        100vw - 1rem - env(safe-area-inset-left, 0px) -
+        100% - 1rem - env(safe-area-inset-left, 0px) -
           env(safe-area-inset-right, 0px)
       ),
       1080px
     );
     max-width: calc(
-      100vw - 1rem - env(safe-area-inset-left, 0px) -
+      100% - 1rem - env(safe-area-inset-left, 0px) -
         env(safe-area-inset-right, 0px)
     );
     padding: 0.5rem 0.65rem;
     margin: 0.65rem auto 0;
-    border-radius: 14px;
+    border-radius: 12px;
     gap: 0.45rem;
   }
   .Logo {
@@ -523,6 +566,7 @@ body {
     font-size: 0.78rem;
     padding: 0.38rem 0.55rem;
     margin-left: 0.45rem;
+    min-height: 38px;
   }
   .MenuToggle {
     display: block;
@@ -539,23 +583,26 @@ body {
     padding-left: var(--phone-gutter);
     padding-right: var(--phone-gutter);
     box-sizing: border-box;
+    height: 100svh;
+    min-height: 560px;
   }
   .TextType {
-    font-size: clamp(1.35rem, 6.8vw, 1.85rem);
-    line-height: 1.15;
+    font-size: clamp(2.05rem, 11vw, 3.2rem);
+    line-height: 1.05;
     text-align: center;
   }
   .smTextType {
-    font-size: 0.9rem;
+    font-size: clamp(0.92rem, 3.5vw, 1.03rem);
     line-height: 1.5;
-    max-width: 34ch;
+    max-width: 32ch;
     margin-left: auto;
     margin-right: auto;
   }
   .VMWbutton {
-    font-size: 0.82rem;
-    padding: 0.55rem 1.15rem;
-    letter-spacing: 0.04em;
+    font-size: 0.88rem;
+    padding: 0.68rem 1.1rem;
+    min-height: 46px;
+    width: min(100%, 240px);
     margin-top: 1.25rem;
   }
   .scrollBox {
@@ -571,9 +618,9 @@ body {
     right: 0;
     left: auto;
     transform: none;
-    background: rgba(20, 19, 19, 0.92);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.55);
+    background: var(--surface-strong);
+    backdrop-filter: blur(18px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
     border-radius: 12px;
     padding: 0.65rem;
     flex-direction: column;
@@ -590,7 +637,7 @@ body {
   .Links a {
     display: block;
     text-align: center;
-    padding: 0.55rem 0.75rem;
+    padding: 0.78rem 0.75rem;
     border-radius: 8px;
     font-size: 0.82rem;
   }
@@ -620,13 +667,13 @@ body {
   .NavBar {
     width: min(
       calc(
-        100vw - 0.75rem - env(safe-area-inset-left, 0px) -
+        100% - 0.75rem - env(safe-area-inset-left, 0px) -
           env(safe-area-inset-right, 0px)
       ),
       1080px
     );
     max-width: calc(
-      100vw - 0.75rem - env(safe-area-inset-left, 0px) -
+      100% - 0.75rem - env(safe-area-inset-left, 0px) -
         env(safe-area-inset-right, 0px)
     );
     border-radius: 12px;
@@ -649,7 +696,7 @@ body {
     margin: 1rem auto;
   }
   .TextType {
-    font-size: clamp(1.2rem, 6.2vw, 1.52rem);
+    font-size: clamp(1.82rem, 10vw, 2.45rem);
   }
   .smTextType {
     font-size: 0.875rem;

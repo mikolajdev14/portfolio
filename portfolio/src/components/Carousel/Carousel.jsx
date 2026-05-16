@@ -1,9 +1,9 @@
 import "./Carousel.css";
-import { useState, useEffect } from "react";
-import portfolioImage from "../../assets/image.png";
-import cafeImg from "../../assets/cafe.png";
-import personalTrainer from "../../assets/trenerPersonalny.png";
-import productPage from "../../assets/ProductPage.png";
+import { useState, useEffect, useMemo } from "react";
+import portfolioImage from "../../assets/image.webp";
+import cafeImg from "../../assets/cafe.webp";
+import personalTrainer from "../../assets/trenerPersonalny.webp";
+import productPage from "../../assets/ProductPage.webp";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -30,6 +30,7 @@ const projectTranslations = {
         "A modern landing page for a cafe, built with React, TypeScript, Shadcn UI components, and Tailwind CSS. Features responsive design, animations and elegant UI.",
       technologies: ["React", "TypeScript", "Shadcn", "Tailwind"],
       github: "https://github.com/mikolajdev14/Coffe-Shop-Landing-Page",
+      live: "https://coffe-shop-landing-page-hqx1gd180-mikolajdev14s-projects.vercel.app/",
     },
 
     {
@@ -40,6 +41,7 @@ const projectTranslations = {
         "A modern website for a personal trainer, built with Next.js, TypeScript, and Tailwind CSS. Features responsive design, animations, and an elegant UI.",
       technologies: ["Next.js", "TypeScript", "Tailwind CSS"],
       github: "https://github.com/mikolajdev14/personal-trainer-example-page",
+      live: "https://personal-trainer-example-page-gojs95ma3-mikolajdev14s-projects.vercel.app/",
     },
     {
       ref: "Sample Product Landing Page",
@@ -49,6 +51,7 @@ const projectTranslations = {
         "FlowSync AI is a dark, glass-style one-page SaaS landing (fictional product) built as a portfolio piece. It uses Next.js 14, React, TypeScript, Tailwind, and Framer Motion for layout, motion, and responsive UX.",
       technologies: ["Next.js", "TypeScript", "Framer Motion"],
       github: "https://github.com/mikolajdev14/Sample-Product-Landing-Page",
+      live: "https://sample-product-landing-page-7bwdh5t8b-mikolajdev14s-projects.vercel.app/",
     },
   ],
   pl: [
@@ -71,6 +74,7 @@ const projectTranslations = {
         "Nowoczesna strona główna kawiarni, zbudowana w React, TypeScript, komponentach Shadcn UI i Tailwind CSS. Ma responsywny design, animacje i elegancki interfejs użytkownika.",
       technologies: ["React", "TypeScript", "Shadcn", "Tailwind"],
       github: "https://github.com/mikolajdev14/Coffe-Shop-Landing-Page",
+      live: "https://coffe-shop-landing-page-hqx1gd180-mikolajdev14s-projects.vercel.app/",
     },
 
     {
@@ -81,6 +85,7 @@ const projectTranslations = {
         "Nowoczesna strona dla trenera personalnego, zbudowana w Next.js, TypeScript i Tailwind CSS. Oferuje responsywny design, animacje i elegancki interfejs użytkownika.",
       technologies: ["Next.js", "TypeScript", "Tailwind CSS"],
       github: "https://github.com/mikolajdev14/personal-trainer-example-page",
+      live: "https://personal-trainer-example-page-gojs95ma3-mikolajdev14s-projects.vercel.app/",
     },
     {
       ref: "Sample Product Landing Page",
@@ -90,6 +95,7 @@ const projectTranslations = {
         "FlowSync AI to jednostronicowy landing SaaS w ciemnym, szklanym stylu (fikcyjny produkt), zrobiony pod portfolio. Używa Next.js 14, React, TypeScript, Tailwind i Framer Motion do układu, animacji i responsywnego UX.",
       technologies: ["Next.js", "TypeScript", "Framer Motion"],
       github: "https://github.com/mikolajdev14/Sample-Product-Landing-Page",
+      live: "https://sample-product-landing-page-7bwdh5t8b-mikolajdev14s-projects.vercel.app/",
     },
   ],
 };
@@ -100,9 +106,13 @@ export function Carousel({ language = "en" }) {
   );
 
   useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth < 768);
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    const mediaQuery = window.matchMedia("(max-width: 767px)");
+    const handleChange = (event) => setIsMobile(event.matches);
+
+    setIsMobile(mediaQuery.matches);
+    mediaQuery.addEventListener("change", handleChange);
+
+    return () => mediaQuery.removeEventListener("change", handleChange);
   }, []);
 
   const settings = {
@@ -118,11 +128,7 @@ export function Carousel({ language = "en" }) {
       { breakpoint: 480, settings: { slidesToShow: 1 } },
     ],
   };
-  let [projects, setProjects] = useState(projectTranslations[language]);
-
-  useEffect(() => {
-    setProjects(projectTranslations[language]);
-  }, [language]);
+  const projects = useMemo(() => projectTranslations[language], [language]);
 
   return isMobile ? (
     <div
@@ -135,8 +141,10 @@ export function Carousel({ language = "en" }) {
         width: "100%",
         maxWidth: "var(--phone-text-max, 36rem)",
         margin: "0 auto",
-        paddingLeft: "max(var(--phone-gutter, 1rem), env(safe-area-inset-left, 0px))",
-        paddingRight: "max(var(--phone-gutter, 1rem), env(safe-area-inset-right, 0px))",
+        paddingLeft:
+          "max(var(--phone-gutter, 1rem), env(safe-area-inset-left, 0px))",
+        paddingRight:
+          "max(var(--phone-gutter, 1rem), env(safe-area-inset-right, 0px))",
         boxSizing: "border-box",
       }}
     >

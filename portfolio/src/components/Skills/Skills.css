@@ -3,7 +3,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 3rem clamp(1rem, 4vw, 2rem) 1.25rem;
+  padding: var(--section-y, 5rem) clamp(1rem, 4vw, 2rem) clamp(2.5rem, 6vw, 4rem);
   padding-left: max(1rem, env(safe-area-inset-left, 0px));
   padding-right: max(1rem, env(safe-area-inset-right, 0px));
   perspective: 1200px;
@@ -13,7 +13,7 @@
 .skills-header {
   text-align: center;
   max-width: 40rem;
-  margin-bottom: 2.75rem;
+  margin-bottom: clamp(1.75rem, 4vw, 3rem);
 }
 
 .skills-title {
@@ -21,7 +21,7 @@
   font-size: clamp(2rem, 5vw, 3rem);
   font-weight: 700;
   color: #fff;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
   line-height: 1.15;
 }
 
@@ -34,7 +34,7 @@
   margin: 0 0 0.75rem;
   font-size: clamp(0.95rem, 2.2vw, 1.1rem);
   font-weight: 400;
-  color: rgba(255, 255, 255, 0.72);
+  color: var(--text-muted, rgba(235, 241, 255, 0.7));
   line-height: 1.65;
 }
 
@@ -42,9 +42,9 @@
   margin: 0;
   font-size: 0.8rem;
   font-weight: 500;
-  letter-spacing: 0.08em;
+  letter-spacing: 0;
   text-transform: uppercase;
-  color: rgba(157, 3, 252, 0.75);
+  color: rgba(34, 211, 238, 0.82);
 }
 
 .skills-bento {
@@ -58,12 +58,12 @@
 
 .skills-panel {
   position: relative;
-  border-radius: 22px;
+  border-radius: 12px;
   padding: 1.35rem 1.25rem 1.5rem;
   background: linear-gradient(
     155deg,
-    rgba(255, 255, 255, 0.09) 0%,
-    rgba(255, 255, 255, 0.03) 100%
+    rgba(255, 255, 255, 0.08) 0%,
+    rgba(255, 255, 255, 0.025) 100%
   );
   border: 1px solid rgba(255, 255, 255, 0.12);
   box-shadow:
@@ -80,10 +80,10 @@
 }
 
 .skills-panel:hover {
-  border-color: rgba(157, 3, 252, 0.28);
+  border-color: rgba(34, 211, 238, 0.3);
   box-shadow:
     0 12px 40px rgba(0, 0, 0, 0.4),
-    0 0 0 1px rgba(157, 3, 252, 0.12),
+    0 0 0 1px rgba(34, 211, 238, 0.12),
     inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
@@ -93,7 +93,7 @@
   background: conic-gradient(
     from 200deg at 70% 20%,
     transparent 0deg,
-    rgba(157, 3, 252, 0.07) 60deg,
+    rgba(34, 211, 238, 0.055) 60deg,
     transparent 120deg
   );
   opacity: 0.85;
@@ -117,18 +117,18 @@
   font-size: clamp(1.05rem, 2.5vw, 1.25rem);
   font-weight: 600;
   color: #fff;
-  letter-spacing: 0.02em;
+  letter-spacing: 0;
 }
 
 .skills-panel__badge {
   flex-shrink: 0;
   font-size: 0.68rem;
   font-weight: 600;
-  letter-spacing: 0.1em;
+  letter-spacing: 0;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.55);
   padding: 0.35rem 0.6rem;
-  border-radius: 999px;
+  border-radius: 8px;
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
@@ -151,7 +151,7 @@
   align-items: center;
   gap: 0.45rem;
   padding: 0.42rem 0.75rem 0.42rem 0.65rem;
-  border-radius: 999px;
+  border-radius: 9px;
   background: rgba(0, 0, 0, 0.22);
   border: 1px solid rgba(255, 255, 255, 0.12);
   color: #fff;
@@ -173,9 +173,9 @@
   border-radius: 999px 0 0 999px;
   background: linear-gradient(
     180deg,
-    #c084fc 0%,
+    #22d3ee 0%,
     #9d03fc calc(var(--level) * 1%),
-    rgba(157, 3, 252, 0.25) 100%
+    rgba(34, 211, 238, 0.2) 100%
   );
   opacity: 0.85;
   pointer-events: none;
@@ -183,16 +183,16 @@
 
 .skills-chip:hover {
   transform: translateY(-3px) scale(1.02);
-  border-color: rgba(157, 3, 252, 0.45);
+  border-color: rgba(34, 211, 238, 0.4);
   box-shadow:
     0 8px 24px rgba(0, 0, 0, 0.35),
-    0 0 20px rgba(157, 3, 252, 0.18);
-  background: rgba(157, 3, 252, 0.1);
+    0 0 20px rgba(34, 211, 238, 0.13);
+  background: rgba(34, 211, 238, 0.08);
 }
 
 .skills-chip__icon {
   font-size: 1.05rem;
-  color: #c084fc;
+  color: var(--accent-alt, #22d3ee);
   transition: color 0.25s ease, transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -204,7 +204,7 @@
 .skills-chip__name {
   font-size: 0.82rem;
   font-weight: 600;
-  letter-spacing: 0.02em;
+  letter-spacing: 0;
   white-space: nowrap;
 }
 
@@ -230,8 +230,8 @@
 .skills-chip__gauge-fill {
   display: block;
   height: 100%;
-  background: linear-gradient(90deg, #7c3aed, #9d03fc);
-  box-shadow: 0 0 12px rgba(157, 3, 252, 0.5);
+  background: linear-gradient(90deg, #22d3ee, #9d03fc);
+  box-shadow: 0 0 12px rgba(34, 211, 238, 0.45);
   transition: width 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -271,7 +271,7 @@
 
   .skills-hint {
     font-size: 0.68rem;
-    letter-spacing: 0.06em;
+    letter-spacing: 0;
   }
 
   .skills-bento {
@@ -280,7 +280,7 @@
 
   .skills-panel {
     padding: 1.1rem 1rem 1.25rem;
-    border-radius: 18px;
+    border-radius: 12px;
   }
 
   .skills-panel__title {

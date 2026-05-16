@@ -1,4 +1,3 @@
-import LightRays from "../LightRays/LightRays";
 import "./MainPage.css";
 import TextType from "../TextType/TextType";
 import { About } from "../About/About";
@@ -6,12 +5,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
 import { Skills } from "../Skills/Skills";
 import { Projects } from "../Projects/Projects";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, lazy, Suspense } from "react";
 import { Contact } from "../Contact/Contact";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
+
+const LightRays = lazy(() => import("../LightRays/LightRays"));
 
 const translations = {
   en: {
@@ -20,7 +21,7 @@ const translations = {
     skills: "Skills",
     projects: "Projects",
     contact: "Contact",
-    greeting: "Hi ! I'm Mikołaj",
+    greeting: "Hi, I'm Mikołaj",
     subtitle:
       "I create modern websites and applications that help businesses attract more customers online.",
     viewWork: "View My Work",
@@ -32,7 +33,7 @@ const translations = {
     skills: "Umiejętności",
     projects: "Projekty",
     contact: "Kontakt",
-    greeting: "Cześć! Jestem Mikołaj",
+    greeting: "Cześć, jestem Mikołaj",
     subtitle:
       "Tworzę nowoczesne strony i aplikacje, które pomagają firmom zdobywać więcej klientów online.",
     viewWork: "Zobacz moje prace",
@@ -81,6 +82,7 @@ export function MainPage() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [language, setLanguage] = useState("en");
   const [compactNav, setCompactNav] = useState(false);
+  const [showLightRays, setShowLightRays] = useState(false);
 
   const navBarRef = useRef(null);
   const logoRef = useRef(null);
@@ -95,6 +97,35 @@ export function MainPage() {
   const skillsRef = useRef(null);
   const projectsRef = useRef(null);
   const contactRef = useRef(null);
+
+  useEffect(() => {
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+
+    if (reduceMotion) {
+      return undefined;
+    }
+
+    let timeoutId;
+    let idleId;
+    const loadBackground = () => setShowLightRays(true);
+
+    if ("requestIdleCallback" in window) {
+      idleId = window.requestIdleCallback(loadBackground, { timeout: 1200 });
+    } else {
+      timeoutId = window.setTimeout(loadBackground, 700);
+    }
+
+    return () => {
+      if (idleId) {
+        window.cancelIdleCallback(idleId);
+      }
+      if (timeoutId) {
+        window.clearTimeout(timeoutId);
+      }
+    };
+  }, []);
 
   useEffect(() => {
     const aboutEl = aboutRef.current;
@@ -374,18 +405,22 @@ export function MainPage() {
 
       {/* LightRays as background */}
       <div className="LightRaysContainer">
-        <LightRays
-          raysOrigin="top-center"
-          raysColor="#9d03fc"
-          raysSpeed={1.5}
-          lightSpread={1}
-          rayLength={100}
-          followMouse={true}
-          mouseInfluence={0.1}
-          noiseAmount={0.1}
-          distortion={0.05}
-          className="background-rays"
-        />
+        {showLightRays && (
+          <Suspense fallback={null}>
+            <LightRays
+              raysOrigin="top-center"
+              raysColor="#9d03fc"
+              raysSpeed={1.5}
+              lightSpread={1}
+              rayLength={100}
+              followMouse={true}
+              mouseInfluence={0.1}
+              noiseAmount={0.1}
+              distortion={0.05}
+              className="background-rays"
+            />
+          </Suspense>
+        )}
       </div>
 
       {/* Welcome Section - Centered in viewport */}
